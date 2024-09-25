@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.sheetjs.com/xlsx-0.19.0/package/dist/xlsx.full.min.js"></script>
+    <style>
+        .question{
+            font-size: 30px;
+        }
+        .right{
+            color:#95bb72;
+        }
+        .no{
+            color: #F65353;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            // 파일가져오기
+            $('#file-upload').change(function(e){
+                const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(event){
+                const data = new Uint8Array(event.target.result);
+                const workbook = XLSX.read(data,{type:'array'});
+
+                // 첫번째 시트;
+                const firstWheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstWheetName];
+                // 시트 데이터를 json으로 변환
+                const json =XLSX.utils.sheet_to_json(worksheet,{header:1});
+                console.log(json);
+                let header = json[0]
+                let question =[];
+                json.slice(1).forEach(function(row){
+                    row.forEach(function(q,i){
+
+                          if(q){
+                        question.push({dimension: header[i],question:q});
+                    }
+                    })
+                
+                })
+                console.log(question)
+                makeSurvey(question);
+                $('#submit-btn').prop('disabled', false);
+            }
+            // arrayBuffer 형식으로 읽음
+            // arrayBuffer는 고정된 크기의 메모리 블록으로 연속된 바이트 배열 혈태
+            reader.readAsArrayBuffer(file);
+            });
+
+            // 회면 출력하기
+            function makeSurvey(qq){
+                let template = $('#question-template');
+                $('#content-main').empty();
+                qq.forEach(function(item,idx){
+                    let newQ = template.clone().removeAttr('id').show();
+                    newQ.find('.question').text((idx+1)+"."+item.question);
+                    newQ.find('input[type="range"]').attr('name', item.dimension);
+                    $('#content-main').append(newQ);
+
+
+
+                })
+                $('#mbti-form').show();
+            
+            }
+
+            // 선택 계산하기
+
+            $('#submit-btn').click(function(){
+                //jquery 에서 사용되는 메서드로 form데이터를 배열로 변환 시켜줌
+                let formData = $('#mbti-form').serializeArray();
+                console.log(formData);
+
+                let scores = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+                formData.forEach(function(item){
+                    scores[item.name] += parseInt(item.value);
+                })
+                console.log(scores)
+
+                let result={
+                    EI : scores.E >scores.I ? 'E' :'I',
+                    SN : scores.S >scores.N ? 'S' :'N',
+                    TF : scores.T >scores.F ? 'T' :'F',
+                    JP : scores.J >scores.P ? 'J' :'P',
+                }
+                let mbtiResult = result.EI + result.SN + result.TF + result.JP;
+                
+            })
+            $('#submit-btn').click(function(){
+                $('result_mbti').val(mbtiResult.text());
+            })
+        
+
+            // 유형 계산 및 출력
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container-fulid">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card m-5" >
+                    <div class="card-header">
+                        <h3>MBTI 설문 </h3>
+                        <input type="file" id="file-upload" class="form-control-file">
+						 <img src="./MBTI.png" class="w-100" alt="">
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" id="mbti-form">
+                            <!-- template -->
+                            <div class="col-12" id="content-main">
+                                    <div class="mb-3" id="question-template" style="display: none;;">
+                                        <label for="" class="form-label d-flex justify-content-start question">1.질문</label>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                                            <label class="form-label no">동의하지 않음!</label>
+                                            <label class="form-label">중립</label>
+                                            <label class="form-label right">매우 동의함!</label>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="range" class="form-range" min="1" max="5" step="1" value="3" name="">
+                                        </div>
+                                    </div>
+                            </div>
+                            <hr>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="button" disabled id="submit-btn"
+                                data-bs-target="#exampleModal" data-bs-toggle="modal">Submit form</button>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="result_mbti"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+</html>

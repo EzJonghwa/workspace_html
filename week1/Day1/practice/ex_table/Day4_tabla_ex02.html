@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>행열 테이블 만들기</title>
+    <style>
+
+        td{
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            font-size: 30px;
+            background-color: rgb(224, 170, 170);
+        }
+        td:hover{
+            background-color: aqua;
+            color: aliceblue;
+        }
+        td:active{
+            rotate: 720deg;
+            transition-duration: 2s;
+        }
+        @keyframes colorC{from {color: blue;}
+                            to {color: red;}}
+        h1{
+            animation-name: colorC; animation-duration:1s ;
+            animation-iteration-count:infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>행/열 테이블 만들기</h1>
+    <hr>
+    <script>
+
+        let row = parseInt(prompt("몇행?"))
+        let col = parseInt(prompt("몇열?"))
+        alert(row + "X" + col + "테이블을 작성합니다!!")
+        document.write("<table border='1'>")
+            for(let i =1; i<=row; i++){
+                document.write("<tr>")
+                    for(let j =1; j<=col; j++){
+                        document.write("<td>" + i +"X"+j+"</td>");
+                    }
+                document.write("</tr>")
+            }
+        document.write("</table>")
+
+    </script>
+    
+</body>
+</html>

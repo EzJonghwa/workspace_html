@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>if -else 를 이용한 등급 출력</h3>
+    <hr>
+    <script>
+        let grade;
+        //화면에서 사용자 입력(입력은 String)
+        //prompt 함수는 사용자 입력을 받아 입력받은 값을 리턴함.
+        let score = prompt("정수를 입력하세요!");
+        console.log(score, typeof(score));
+        score=parseInt(score); //정수 형태로 parseFloat:실수 형태
+
+        if (score >=90) {
+            grade ="A";
+        } else if (score>=80){
+            grade="B";
+        }else{
+            grade="F"
+        }
+        console.log (score,"는", grade,"입니다.");
+        //write()<-- 화면애 출력하는 함수document 에 있는기능
+        document.write(score+"는 "+grade+"입니다");
+
+    </script>
+</body>
+</html>

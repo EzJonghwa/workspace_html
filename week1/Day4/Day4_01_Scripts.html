@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScripts 작성위치</title>
+    <!-- file로 js작성 -->
+    <script src="lib.js"></script>
+    <script>
+        console.log("Scripts tsg 는 html문서 어디서든 작성가능")
+        console.log("하지만 위치에따른 실행 순서가 있음")
+    </script>
+</head>
+<body>
+    <h3>마우스를 이미지에 올려보세요</h3>
+    <hr>
+    <!-- element javascripts code 작성 -->
+    <img id="myImg" src="./img/apple.PNG" onmouseover="this.src='./img/banana.png'" 
+                               onmouseout="this.src='./img/apple.png'">
+    <script>
+        //2.scripts tag에 작성
+        console.log('콘솔에 줄력:',document.getElementById('myImg').src)
+    </script>
+    
+</body>
+</html>

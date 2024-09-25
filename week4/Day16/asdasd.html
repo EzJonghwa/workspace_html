@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        var ap_url = "https://api.odcloud.kr/api/3059715/v1/uddi:8d75f491-3778-47d4-92e8-a3b7846449a6";
+        let seKey = "YEaM+ygpqr5x3CB5YLcIxFE3omTMzjYfnJYz0xVrqMJQEJV2giPIAlVFFGm0nlwrQYbD/yVZMA3q1OWYgS+9Kw==";
+
+        $(document).ready(function () {
+            $('#btn').click(function () {
+                let pages = $('#page').val();
+                let pPages = $('#pPage').val();
+                $.ajax({
+                    url: ap_url,
+                    type: 'GET',
+                    dataType: 'xml',  // 응답 데이터 타입을 xml로 설정
+                    data: {
+                        perPage: pPages,
+                        page: pages,
+                        serviceKey: seKey
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        // 서버에서 받은 XML 데이터에서 필요한 내용을 찾고 HTML에 추가
+                        var output = "<ul>";
+                        $(res).find('data').each(function (i, v) {
+                            var name = $(v).find('name').text();  // 예시: 'name'이라는 태그의 값을 가져옴
+                            var address = $(v).find('address').text();  // 예시: 'address'라는 태그의 값을 가져옴
+
+                            // HTML에 표시할 내용을 생성
+                            output += "<li>이름: " + name + ", 주소: " + address + "</li>";
+                        });
+                        output += "</ul>";
+
+                        $('#view').html(output);  // 생성한 HTML을 div에 추가
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input type="text" id="page" value="1">
+    <input type="text" id="pPage" value="10">
+    <button id="btn">가져오기</button>
+    <div id="view"></div>
+</body>
+
+</html>

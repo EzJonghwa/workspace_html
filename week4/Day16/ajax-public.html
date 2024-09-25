@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c52ae2f3d4ee4e027a63decba491cd84"></script>
+    <script>
+        var api_url = 'http://apis.data.go.kr/6300000/pis/parkinglotIF';
+        let api_key = '01/u7SxCxMdAKSpKhhWj/x4Qh9TmVtiTH+IWuVKC1G55zIZzc/J61x4mSkmjAoWE7G7YJgmM8tQzmQs+6dGdng==';
+        $(document).ready(function () {
+            $('#btn').click(function () {
+                let rows =$('#rows').val();
+                let pages =$('#page').val();
+                let addr =[];
+                $.ajax({
+
+                    url : api_url
+                    ,type:'GET'
+                    ,dataType:'xml'
+                    ,data:{
+                        serviceKey : api_key
+                        ,numOfRows :rows
+                        ,pageNo :pages
+
+                    },success:function(res){
+                        // element 를 찾는 find 로 xml 의 태그도 찾을 수 있음
+                        console.log(res)
+             
+                        
+                    }, error: function(e){
+                        console.log(e)
+                        //success /error 이후 완료된 뒤 호출
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input type="text" id="rows" value="3">
+    <input type="text" id="page" value="1">
+    <button id="btn">가져오기</button>
+    <div id="map" style="width: 100%; height: 800px;"></div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise 테스트</title>
+    <script>
+        console.log('1.작업시작');
+
+        function 비동기작업(){
+            return new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    console.log('2.비동기 작업 실행중');
+                    // resolve ('작업성공')
+                    resolve();
+
+
+                },2000);
+
+
+            })
+        }
+
+        async function 실행() {
+            let re = await 비동기작업();
+            console.log(re);
+            console.log('3.비동기 작업 완료');
+        }
+            
+        실행();
+        console.log('4.모든작업완료')
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

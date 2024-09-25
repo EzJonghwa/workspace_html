@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기 방식으로 JSON 데이터 받기</title>
+        <style>
+            html, body {margin:0; padding: 0; height: 100%;}
+            #left_div {float: left; height: 800px; width: 45%; overflow: scroll; }
+            table tr:hover{background-color: cadetblue;}
+
+        </style>
+    <script>
+        let url = "https://api.upbit.com/v1/market/all";
+        let detail_url ="https://api.upbit.com/v1/ticker?markets=";
+        let ajax = new XMLHttpRequest();
+        
+        function fn_get(code,func){
+            if (code ==''){
+                ajax.open("GET",url,true);
+            }
+            else{
+                ajax.open("GET",detail_url +code ,true);
+                }
+            ajax.onreadystatechange = func;
+            ajax.send();
+        }
+        function main(){
+            //4: 데이터를 요청 받았을 때 200: 정상 응답이 됐을때
+            if(ajax.readyState == 4 && ajax.status==200){
+                // console.log(ajax);
+                let arr =JSON.parse(ajax.responseText);
+                let str ='';
+                for(let i =0; i<arr.length; i++){
+                    console.log(arr[i]['market'])
+                    
+                    // str +='<tr onclick ="alert(\''+arr[i]['market']+'\')">'
+                    str += '<tr onclick ="fn_get(\''+arr[i]['market']+'\',detail)">';
+                    str += '<td>'+arr[i]['market'] + '</td>'
+                    str += '<td>'+arr[i]['korean_name'] + '</td>'
+                    str += '<td>'+arr[i]['english_name'] + '</td>'
+                    str += '</tr>'
+
+                    }
+                document.getElementById('all_table').innerHTML =str;
+
+                }
+             };
+             function detail(){
+            //4: 데이터를 요청 받았을 때 200: 정상 응답이 됐을때
+            if(ajax.readyState == 4 && ajax.status==200){
+                // console.log(ajax);
+                let arr =JSON.parse(ajax.responseText);
+                console.log(arr)
+                }
+             };
+                
+
+               
+
+        
+
+    </script>
+</head>
+<body>
+
+    <button type="button" onclick="fn_get('',main)">요청!</button>
+    <div class="row">
+        <div id="left_div">
+            <table id="all_table"></table>
+
+        </div>
+    </div>
+
+</body>
+</html>

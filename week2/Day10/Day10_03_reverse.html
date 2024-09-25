@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로꾸꺼</title>
+</head>
+<body>
+<h3>텍스트를 입력받아 거꾸로 출력하시오</h3>
+<script>
+    let word = prompt("거꾸로 만들 단어를 입력하세요","이효리");
+
+    //화면에 출력은 리효이
+    //1. 자른다 반전시킨다
+    let str = word.split("").reverse().join(',');
+    document.write(word +'을 거꾸로 하면:' + str);
+    // for(let i =0; i<word.length; i++) {
+    //     let a = document.getElementById("nname");
+    //     a.innerHTML= word[i-(word.length)];
+    // }
+</script>    
+</body>
+</html>

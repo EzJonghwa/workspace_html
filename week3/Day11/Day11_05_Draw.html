@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그림판</title>
+
+    <script>
+        let canvas, context;
+        let startX ,startY;
+        let dragging =false;
+        let tool ='P';
+        let size =1;
+        function init(){
+            canvas=document.getElementById('myCanvas');
+            context=canvas.getContext ('2d');
+            context.lineWidth= size;
+            context.inlineCap ='round';
+            context.strokeStyle ="black";
+            canvas.addEventListener('mousemove', move)
+            canvas.addEventListener('mousedown', down)
+            canvas.addEventListener('mouseup', up)
+            canvas.addEventListener('mouseout', out)
+           
+        }
+        // 클릭을 했을때
+        function down(e){
+            dragging = true;
+            startX = e.offsetX;     // 클릭한 시점을 그리는 시작으로
+            startY = e.offsetY;
+            if (tool =='E'){
+                context.clearRect(startX.startY, size+3, size+3)
+            }
+        }
+        // 클릭을 놨을때
+        function up(){
+            dragging = false;
+        }
+        function out(){
+            dragging= false;
+
+        }
+        function draw (curX, curY){
+            if (tool== 'P'){
+            context.beginPath();
+            context.moveTo(startX, startY);
+            context.lineTo(curX, curY);
+            context.stroke();
+        }else if(tool == 'E'){
+            context.clearRect(curX, curY, size+9,size+9);
+        }
+        }
+        // 움직일때
+        function move(e){
+            if (!dragging){
+                return; // true 값이 아니면 그려지지 않도록 
+            }
+            let curX = e.offsetX
+            let curY = e.offsetY
+            draw(curX, curY);
+            startX = curX;  // 그려진 다음 시점에 시작값으로 되도록 저녁변수의 값을 변경.
+            startY = curY;
+        }
+        function fn_change(obj){
+
+            if (obj.name =='tool'){
+                tool = obj.value;
+                if(tool == "E"){
+                    canvas.style.cursor ="url(cursor.cur), auto";
+                }else{
+                    canvas.style.cursor ='auto'
+                }
+            }
+        }
+
+</script>
+</head>
+<body onload="init()">
+    <h3>그림을 그려보세요^^</h3>
+    <hr>
+    <canvas id="myCanvas" width="400px" height="300px" style="background-color: aliceblue;"></canvas>
+    <div>
+        <table>
+            <tr> <td>컬러</td>
+            <td><input type="color" onchange=""></td>
+            </tr>
+            <tr>
+                <td>사이즈</td>
+                <td> <input type="range" min="1" max="30" value="1"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">붓 :</label> <input type="radio" name="tool" value="P" checked onchange="fn_change(this)">
+                    <label for="">지우개 : <input type="radio" name="tool" value="E" onchange="fn_change(this)">
+                </td>
+                        <td><button> 전체 삭제 </button></td>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

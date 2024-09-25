@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디폴트 행동 취소</title>
+
+    <script>
+        function fn_check(){
+            let res = confirm("네이버로 이동할까요");
+            return res;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h3>이벤트 디폴트 행동 취소</h3>
+    <hr>
+    <!-- a tag 는 디폴트 행동이 herf 로 이동 -->
+     <!-- 디폴트 행동 취소방법1 retuen false-->
+      <a href="http:/naver.com" onclick="return false">네이버 이동1</a>     
+      <a href="http:/naver.com" onclick="return fn_check()">네이버 이동2</a>
+
+    <form action="">
+        <!-- 디폴트 행동 취소방법2. perventDefault -->
+        <input type="checkbox" > 체크박스(체크됨) <br>
+        <input type="checkbox" onclick="event.preventDefault()"> 체크박스(체크안됨) <br>    
+    </form>
+
+</body>
+</html>

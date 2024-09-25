@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캘린더</title>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+        window.onload = function() {
+            let calendarWElement = document.getElementById('calendar');
+            
+            // 로컬 스토리지에서 데이터 가져오기
+            let current = fn_getdata();
+            
+            // FullCalendar 초기화
+            let calendar = new FullCalendar.Calendar(calendarWElement, {
+                initialView: 'dayGridMonth',
+                events: current,
+                
+                // 이벤트 클릭 시
+                eventClick: function(res) {
+                    console.log(res);
+                    let action = prompt('d:삭제, e:수정');
+                    if (action == 'd') {
+                        res.event.remove();
+                        fn_del(res.event.startStr);
+                    } else if (action == 'e') {
+                        let newMsg = prompt('수정내용을 입력해주세요');
+                        if (newMsg) {
+                            res.event.setProp('title', newMsg);
+                            fn_update(res.event.startStr, newMsg);
+                        }
+                    }
+                },
+                
+                // 빈 날짜 클릭 시
+                dateClick: function(res) {
+                    let msg = prompt('내용을 입력하세요~');
+                    if (msg) {
+                        let eventData = { title: msg, start: res.dateStr };
+                        calendar.addEvent(eventData);
+                        fn_save(eventData);
+                    }
+                }
+            });
+            
+            calendar.render();
+        }
+
+        // 데이터 가져오기
+        function fn_getdata() {
+            let data = localStorage.getItem('events');
+            let current_data = [];
+            if (data) {
+                current_data = JSON.parse(data);
+            } else {
+                console.log('데이터 없음');
+            }
+            return current_data;
+        }
+
+        // 데이터 삭제
+        function fn_del(del_date) {
+            let data = fn_getdata();
+            for (let i = 0; i < data.length; i++) {
+                if (data[i]['start'] == del_date) {
+                    data.splice(i, 1);
+                    localStorage.setItem('events', JSON.stringify(data));
+                    break;
+                }
+            }
+        }
+
+        // 데이터 저장
+        function fn_save(eventData) {
+            let data = fn_getdata();
+            data.push(eventData);
+            localStorage.setItem('events', JSON.stringify(data));
+        }
+
+        // 데이터 수정
+        function fn_update(dateStr, newTitle) {
+            let data = fn_getdata();
+            for (let i = 0; i < data.length; i++) {
+                if (data[i]['start'] == dateStr) {
+                    data[i]['title'] = newTitle;
+                    localStorage.setItem('events', JSON.stringify(data));
+                    break;
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="calendar" style="width: 800px;"></div>
+</body>
+</html>

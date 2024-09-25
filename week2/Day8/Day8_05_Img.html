@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image 객체</title>
+    <style>
+        img {width:200px;}
+    </style>
+    <script>
+        let fiels = ["./img/2.jpg","./img/3.jpg","./img/1.jpg"];
+        let imgs=[];
+        for(let i=0; i<fiels.length; i++){
+            imgs[i] = new Image();  // 해당 이미지 객체생성
+            imgs[i].src = fiels[i]  // 해당 이미지 객체에 이미지 위치 지정 (load 이벤트가 일어남)
+        }
+        let next =1;
+        function change(obj){
+            obj.src = imgs[next].src;
+            next ++;
+            next %= imgs.length;// 개수를 넘으면 처음으로 
+        }
+    </script>
+</head>
+<body>
+    <h3>이미지를 클릭하면 다음이미지를 보여줍니다.</h3>
+    <hr>
+    <img src="./img/1.jpg" alt="" onclick="change(this)">
+</body>
+</html>

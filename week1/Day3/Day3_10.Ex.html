@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 호버효과 촬용</title>
+    <style>
+
+        #container{
+            position: relative; margin: 0; padding: 0;
+        }
+        img{
+            margin: 0; padding: 0; float: left;
+        }
+        #circle {
+            position: absolute; width: 500px; height: 500px;
+            border-radius: 250px; background-color: black; opacity: 0.6;
+            transition-duration: 0.45s;
+        }
+        p{
+            font-size: 50px; color: white; text-align: center; margin-top: 200px;
+        }
+        #container:hover #circle {opacity: 0; transform: translateY(250px);}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="./img/earth.png" width="500px" alt="">
+        <div id="circle">
+            <p>지구 입니다.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function fn_create(){
+            let newDiv = document.createElement("div");
+            newDiv.setAttribute("class","myDiv");
+            newDiv.style.backgroundColor = 'yellow';
+            newDiv.innerHTML ="새로운 DIV";
+
+            let newBtn = document.createElement("button");
+            newBtn.innerHTML ="X";
+            newBtn.onclick =function(){
+                let pp = this.parentElement.parentElement; //조상
+                let p = this.parentElement; //부모
+                pp.removeChild(pp);
+                
+            }
+            newDiv.appendChild(newBtn);
+            
+            // newDiv에 자식요소로 버튼 (x)만들고 
+            // (x)를 클릭하면 new div가 삭제되도록 수정하시오
+            newBtn.onclick = function(){
+                this.parent
+                console.log (this.parentElement);
+                this.parentElement.removeChild(this);   //부모로부터 나 자신을 삭제
+            }
+
+            document.body.appendChild(newDiv);  
+        }
+        function fn_insert(){
+            let newDiv = document.createElement("div");
+            newDiv.innerHTML = "새로 생성된 DIV";
+            document.body.insertBefore(newDiv, document.body.childNodes[0]);
+            // (객체, 객체 하뤼요소중 처음.)
+
+        }
+
+    </script>
+</head>
+<body>
+    <h3> 객체를 동적으로 생성 , 삽입, 삭제</h3>
+    <hr>
+    <button type="button" onclick="fn_create()">div 생성</button>
+    <a href="javascript:fn_insert()">0번째에 추가</a>
+</body>
+</html>

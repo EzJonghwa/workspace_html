@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 팀 추첨</title>
+    <script>
+        // 1.추첨하기 클릭시 createTeams()호출 classMate를 랜덤 순서로 셔플!(java collection과 같은 함수가 없음.)
+        // 2.팀은 총 4팀
+        // 3.4개의 배열을 만들고 
+        // 4.각각 담아주기 
+        // 5.화면 출력 함수를 만들어서 화면에 출력
+
+        function createTeams(){
+
+            let classMate = ["강민호","권철규","김윤아","김정인",
+                             "김혜원","박정호","서원빈","안서령","이소희","이승욱",
+                             "이원호","전영범","전종화","정도현","최대준","최지은","한준희"];
+                             
+                            //  let suffle = classMate.split(",");
+                            //  let ran = Math.floor(Math.random()*17)
+                             let wirt= document.createElement("div")
+                             div.id = 'ss';
+                             wirt.innerHTML= "새로운 div";
+        
+                            }
+
+                            
+                        
+        function displayTeams(teams){
+            
+
+        }
+    </script>
+</head>
+<body>
+    <h1>랜덤 팀 구성</h1>
+    <button onclick="createTeams()">추첨하기</button>
+    <div id="teams"></div>
+</body>
+</html>

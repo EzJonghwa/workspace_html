@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parent,children,closet</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('.myButton').click(function(){
+
+                let parentDiv =$(this).parent();    //child 를 반환
+                let grandparent = parentDiv.parent();   //parent div 반환
+                console.log(parentDiv)
+                console.log(grandparent)
+                console.log($(this).parent().parent().parent())
+                // closets() 메서드는 jQuery 에서 제공하는 메서드로 특정 요소로부터 시작하여
+                // dom 트리를 거슬러 올라가며 지정한 선택자와 일치하는 가장가가운 요소를 찾음
+                console.log($(this).closest('.parent'));
+
+                // 자식요소에서 찾는 방법 find() 
+                console.log($(".grandparent").find('button'));
+                console.log($(".grandparent").find('button').eq(1));    // eq 
+            })
+        })
+    </script>
+</head>
+<body>
+
+    <div class="grandparent">
+        <div class="parent">
+            <div class="child">
+                <button class="myButton">Click me</button>
+                <button class="myButton2">Click me</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블록, 인라인, 인라인 블록</title>
+    <style>
+        div{
+            border: 2px solid yellowgreen; color: blue; background-color: aliceblue;
+        }
+        span{
+            border: 3px dotted red; background-color: yellow;
+        }
+        h3{
+            border: 5px dotted blue; background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>h 도 블록</h3>
+    <div> 기본 div</div>
+    이 엘리먼트는 none <div style="display: none;">이 부분이 보이지 않음</div> <br>  
+    <!-- none : 표시 x -->
+    이 엘리먼트는 inline <div style="display: inline; height: 200px;">div(inline)</div> <br>
+    <!-- inline의 hieght 는 존재x -->
+    이 엘리먼트는 inline-block <div style="display: inline-block; height: 200px;"> inline-block 입니다</div>
+    <!-- inline-block의 height 사이즈 존재 -->
+
+    이 엘리먼트는 <div> div <span> div 자식</span> </div> 
+    <!-- div 안에 span 같이 존재 -->
+    이 엘리먼트는 <div> div <span style="display: block;"> div 자식</span> </div>
+    <!-- span을 블록으로 설정해 블록처럼 존재 -->
+</body>
+</html>

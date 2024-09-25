@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 이벤트 갹체</title>
+<script>
+    let width = 1;
+    function fn_down(obj){
+        obj.style.fontStyle = "italic";
+    }
+    function fn_up(obj){
+        obj.style.fontStyle= 'normal';
+    }
+    function fn_over(obj){
+        obj.style.borderColor='violet';
+
+    }
+    function fn_out(obj){
+        obj.style.borderColor='lightgray';
+
+    }
+    function fn_wheel(e,obj){
+        if (e.wheelDalta < 0){
+            width --;
+        }else{
+            width ++;
+        }
+        obj.style.borderStyle ='ridge';
+        obj.style.borderWidth = width+'px';
+    }
+</script>
+</head>
+<body>
+    <h3> 마우스 이벤트 </h3>
+    <hr>
+    마우스관련 <span onmousedown="fn_down(this)" 
+                    onmouseup="fn_up(this)"                
+                    onmouseover="fn_over(this)" onmouseout="fn_out(this)"
+                    onwheel = "fn_wheel(event,this)"> 이벤트</span>가 발생합니다.
+
+    
+</body>
+</html>

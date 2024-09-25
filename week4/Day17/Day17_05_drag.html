@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag $ drop</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <style>
+        *{margin: 0; padding: 0; border: 0;}
+        #container{
+            position: relative; width: 95vw; height: 95vh; border: 1px solid black;
+        }
+        #id_obj{
+            position: absolute; width: 200px; height: 200px; border: 1px, dotted black; text-align: center; 
+            background-color: gainsboro; overflow: hidden;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+             let $obj= $('#id_obj');        /// 변수명에 $ 가능 jquery dom 객체 표시
+             let isMouseDown = false;
+             let mouseX, mouseY, objX, objY;
+             // 초기 위치 설정
+             $obj.css({left :'100px',top:'100px'});
+
+
+             // 마우스 클릭
+             $obj.mousedown(function(e){
+                isMouseDown = true;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                objX = parseInt($obj.css('left'));
+                objY = parseInt($obj.css('top'));
+             });
+             // 마우스 움직임
+             $('#container').mousemove(function(e){
+                if(isMouseDown){
+                    let mouseX2 = e.clientX
+                    let mouseY2 = e.clientY
+                    $obj.css({
+                        left: objX + (mouseX2 - mouseX)+'px',
+                        top: objY + (mouseY2 - mouseY)+'px'
+                    });
+                }
+
+             });
+
+             // 마우스 업
+             $(document).mouseup(function(){
+                isMouseDown = false;
+             })
+
+             //파일 입력창 열기
+             $obj.dblclick(function(){
+                $('#file_input').click();
+                // 
+             })
+             $('#file_input').change(function(){
+                let file = event.target.files[0];
+                if(file && file.type.startsWith('image/')){
+                    let reader = new FileReader();
+                    reader.onload = function(e){
+                        $obj.html('<img sec="' + e.target.result + '" style="width:100%; height:100%; object-fit:cover;">');
+                    }
+                    reader.readAsDataURL(file);
+                }
+
+             })
+
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="id_obj">
+            그림
+        </div>
+
+
+    </div>
+    
+    <input type="file"  id="file_input" accept="image/*" style="display: none;">
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        var api_url = 'https://api.odcloud.kr/api/15077702/v1/uddi:222c1714-3518-4070-a74a-b7abc7304bb6'
+        let api_key = 'YEaM+ygpqr5x3CB5YLcIxFE3omTMzjYfnJYz0xVrqMJQEJV2giPIAlVFFGm0nlwrQYbD/yVZMA3q1OWYgS+9Kw=='
+
+        $(document).ready(function(){
+            $('#btn').click(function(){
+                let page = $('#page').val();
+                let ppage = $('perpage').val();
+                let addr =[];
+                $.ajax({
+                    url:api_url,
+                    type:'GET',
+                    dataType:'jSON',
+                    data : {
+                        perPage : ppage,
+                        page :page,
+                        serviceKey :api_key
+                    },
+                    success :function(res){
+                       console.log(res)
+
+                    },
+                    error:(function(e){
+                        console.log(e);
+
+                    })
+                    
+
+                })
+
+            })
+
+
+
+
+
+        })
+
+
+
+
+    </script>
+
+</head>
+<body>
+    <input type="text" id="page">
+    <input type="text" id="perpage">
+    <button id="btn">즌 송</button>
+</body>
+</html>

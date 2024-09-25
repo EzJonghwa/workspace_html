@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상대배치 relative</title>
+    <style>
+        div{
+            display: inline-block; height: 50px; width: 40px;
+            border: 1px solid lightgray; text-align: center;
+            color: white; background-color: red;
+        }
+        #down:hover {position: relative; left:20px; top: 20px; background-color: green; z-index: -1;
+        }
+        #up:hover {position: relative; right: 20px; bottom: 20px; background-color: green;
+        }
+        /* relative 로 상대적인 움직임을 제어할 수있음 */
+    </style>
+</head>
+<body>
+    
+    <!-- 
+        position 속성
+        static(정적배치) : html 의 모든요소는 디폴트로 정적배치.
+                            html 문서의 일반적인 흐름에 따라 배치됨.
+        relative(상대배치) : 일반적인 흐름에 따라 배치후 추가로 
+                            top ~ left 속성을 사용하여 위치이동 가능
+        absolute(절대배치): 일반적인 흐름을 제거하고 가장 가까운
+                            조상위치를 기준으로 배치 조상이없으면 body기준
+        fixed(고정배치) : 일반적인 흐름을 제거하고 브라우저창 기준으로 고정
+                            페이지를 스크롤해도 변하지 않음 
+        별도 세팅) float(유동배치) : left or right 로요소를 떠오르개함
+     -->
+
+    <h3>relative</h3>
+    <hr>
+    <div>T</div>
+    <div id="down">h</div>
+    <div>a</div>
+    <div>n</div>
+    <div id="up">k</div>
+    <div>s</div>
+    
+</body>
+</html>

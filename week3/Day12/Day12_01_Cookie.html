@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠키</title>
+<script>
+
+
+    // 사용자가 원하는 키값의 밸류값을 저장하기위한 함수
+    function setCookie(name, val, expireDate){
+        let cookieStr = name + "=" + val +((expireDate ==null)?"":("; expires=" +expireDate.toUTCString()));
+        Document.cookie = cookieStr;
+    }
+
+
+    // 저장된 값을 가져오는 함수
+    function getCookie(name){
+        let str = name +"=";
+        let pairs = document.cookie.split(";");
+        for (let i =0; i<pairs.length; i++){
+            let pair = pairs[i].trim();
+            let unit =pair.split("=")
+            if (unit[0]== name){
+                return unit[i];
+            }
+        }
+    }
+    let userName = getCookie("username");
+    let count = getCookie("count");
+    let expires = new Date();
+    // 쿠키에 user name이라는 key애 value 가 없으면
+
+
+    if (userName ==null){
+        count =0;
+        while(true){
+            userName = prompt("이름을 입력하세요^^");
+            if(userName == null || userName ==""){
+                alert("입력헤야함");
+
+            }else {
+                //유효기간 1년 쿠키생성
+                expires.setTime(expires.getTime()+(365*24*60*60*1000))
+                setCookie("username",userName,expires);
+                break;
+
+            }
+        }
+    }
+    count ++;
+    expires.setTime(expires.getTime()+(365*24*60*60*1000));
+    setCookie("count",count, expires);
+    document.write("<p>어서오세요 '" + userName + "' 님의"+count+"번째 방문을 환영 합니다.</p>" )
+
+
+
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 파일</title>
+    <script>
+        
+            let reader = new FileReader();
+            reader.onload = function(e){
+                let data = e.target.result;
+                console.log(data);
+                console.log(csvToJson(data));
+            }
+
+            function readFile(obj){
+                let files = obj.files;
+                for(let i=0; i<files.length; i++){
+                    let file = files[i];
+                    console.log(file.name)
+                    console.log(file.type)
+                    console.log(file.size);
+                    if(file.name.indexOf('.csv') || file.name.indexOf('.txt')){
+                        reader.readAsText(file)
+                    }
+                }
+
+        }
+        function csvToJson(csv_data){
+            let rows = csv_data.split('\r\n');
+            let jsonArr =[];
+            let header = rows[0].split(',');
+            for (let i=0; i< rows.length; i++){
+                let obj ={};
+                let row = rows[i].split(',');
+                for(let j =0; j<header.length; j++){
+                    obj[header[j]] = row[j];
+                }
+                jsonArr.push(obj);
+            }
+            return jsonArr;
+        }
+    </script>
+</head>
+<body>
+    <input type="file" onchange="readFile(this)">
+</body>
+</html> 

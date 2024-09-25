@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔버스</title>
+</head>
+<body>
+    <h3> 기본 사용법과 함수</h3>
+    <hr>
+    <canvas id="myCanvas" style="background-color:  aliceblue;" width="250px" height="150px" ></canvas>
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        //작업공간
+        let context = canvas.getContext("2d");
+        //네모
+
+        context.beginPath();
+        context.strokeStyle ="black";
+        context.rect(30,30,50,50);
+        context.stroke();
+
+        context.beginPath();
+        context.fillStyle="red";
+        context.rect(80,80,50,50);
+        context.fill();
+
+        context.beginPath();
+        context.moveTo(120,20) //
+        context.lineTo(20,50);
+        context.lineTo(150,120);
+        context.lineTo(120,20);
+        context.strokeStyle="magenta";
+        context.stroke();
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./nameList.css">
+    <script>
+        //1 단계 버튼클릭시 input에 입력된value 값 가져오기
+        //2 단계 p tag 생성innerHTML에 1단계에서 가져온 값 넣기(참가자 입력이름)
+        //3 단계 span tag생성 span 태그 클릭시 삭제 이벤트 적용
+        //4 단계 p와 span 태그 결합하여 namelist 에 첫요소에 insert
+        function fn_register(){
+            let userNm = document.getElementById('userName');
+            // console.log(userNm);
+            // console.log(userNm.value);
+            // p tag 생성
+            let newP = document.createElement('p');
+            newP.innerHTML = userNm.value;
+            userNm.value='';    // 버튼을 누르면 입력값 초기화 하기
+            // 삭제 생성
+            let delBtn = document.createElement('span');
+            delBtn.innerHTML = "X";
+            delBtn.setAttribute('class', 'del');
+
+            delBtn.onclick = function(){
+                this.parentElement.parentElement.removeChild(this.parentElement);
+            }
+            
+            newP.appendChild(delBtn);
+
+            let nameList =document.getElementById("nameList");
+            nameList.insertBefore(newP, nameList.childNodes[0]);
+        }
+
+        window.onload = function(){
+            document.getElementById("myForm").addEventListener('keypress', function(e){
+                // e 해당 시점에 생성된 이벤트 객체
+                console.log(e);
+                if(e.key =="Enter"){
+                    e.preventDefault();
+                    fn_register();
+                }
+            })
+
+           
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>참가 신청서</h1>
+        <form id="myForm">
+            <input type="text" id="userName" placeholder="이름을 입력하세요" required>
+            <button type="button" onclick="fn_register()">신청</button>
+        </form>
+        <hr>
+        <div id="nameList"></div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>

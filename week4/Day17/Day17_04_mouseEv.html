@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>움직이는 이미지</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <style>
+        /*커서 안보이도록*/
+        html,body{cursor: none;}
+        #parent_id{
+            position: absolute;
+            left: 0; top: 0;
+            margin-top: -25; margin-left: -25;
+        }
+        @keyframes box {
+            0%{transform: rotate(0deg);}
+            100%{transform: rotate(360deg);}
+            
+        }
+        #cursor_item{animation-name :box; animation-duration: 1s; animation-timing-function: linear;
+        animation-iteration-count: infinite;}
+    </style>
+</head>
+<body>
+    <div id="parent_id">
+        <img src="./images/햄깅이.png" id="cursor_item" width="500px" alt="">
+
+        <script>
+            $(document).ready(function(){
+                const cursor = $('#parent_id');
+                $(document).mousemove(function(e){
+                    cursor.css({transform : 'translate('+ e.clientX + 'px,' + e.clientY+'px)'});
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>

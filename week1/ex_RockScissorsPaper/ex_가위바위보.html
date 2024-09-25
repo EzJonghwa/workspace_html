@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<style>
+	body { text-align:center}
+	span { font-size: 30px;}
+	#vs_id { font-size: 100px; color: red;}
+
+</style>
+<meta charset = "UTF-8">
+<title> 가위바위보 </title>
+<script>
+  
+	document.write("<h1>컴퓨터 가위, 바위, 보 맞추기</h1><hr>");
+	let game = prompt("가위, 바위, 보 중 선택하세요?", "가위");
+	let com = Math.ceil( Math.random() * 3 );
+	console.log(game);
+
+	
+	
+
+	// 사용자 입력 변환 
+		
+	// 가위 바위 보
+
+	//2. 선택 이미지 출력
+	document.write("<div>");
+
+		// com
+		// user 
+		let userinp = 0;
+
+		//3. 조건식 (가위:1, 바위:2, 보:3)
+
+		// 비기는 ==
+
+		// 이기는 1  3 , 2  1 , 3 2
+		// 지는   1  2 , 3	2 , 3 1
+
+		if (game == "가위"){
+			userinp =1;
+			document.write("<img src='./images/math_user_"+userinp+".jpg' id='img_u'>")
+			document.write("<p>user</p><h1>VS</h1>")
+
+			if(com == 1){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_3.jpg'>")
+			}else if (com == 2){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_2.jpg'>")
+			}else{
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_1.jpg'>")
+			}
+
+		}
+		
+		else if (game == "바위"){
+		document.write("<img src='./images/math_user_"+2+".jpg' id='img_u'>")
+		document.write("<p>user</p><h1>VS</h1>")
+			if(com == 1){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_1.jpg'>")
+			}else if (com == 2){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_3.jpg'>")
+			}else{
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_2.jpg'>")
+			}
+
+		}
+
+		else if (game == "보"){
+		document.write("<img src='./images/math_user_"+3+".jpg' id='img_u'>")
+		document.write("<p>user</p><h1>VS</h1>")
+			if(com == 1){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_2.jpg'>")
+			}else if (com == 2){
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_1.jpg'>")
+			}else{
+				document.write("<img src='./images/math_com_"+com+".jpg' id='img_c'>")
+				document.write("<p>com</p>")
+				document.write("<img src='./images/game_3.jpg'>")
+			}
+
+		}
+
+		
+
+	document.write("</div>");
+	
+	
+
+</script>
+</head>
+<body>
+	
+</body>
+</html>

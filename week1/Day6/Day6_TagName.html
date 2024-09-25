@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TagName, ClassName</title>
+    <style>
+     
+    </style>
+    <script>
+        function like_change(){
+            let spanArr = document.getElementsByTagName("span");
+            console.log(spanArr);
+            for (let i = 0; i<spanArr.length; i++){
+                let span = spanArr[i];
+                span.style.color = 'orchid';
+                span.style.fontSize='20px'
+            }
+        }
+        function dislike_change(){
+            let arr = document.getElementsByClassName("dislike");
+            for(let i =0; i<arr.length; i++){
+                let tag=arr[i];
+                tag.style.color = "yellowgreen";
+                tag.style.fontSize = "10px"
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <h3>내가좋아하는 과일 & 싫어하는 과일</h3>
+    <button onclick="like_change()">좋아하는</button>
+    <button onclick="dislike_change()">싫어하는</button>
+    <hr>
+    빨간 <span>  사과 </span>
+    노란 <span> 바나나 </span>
+    씨가많은 <span class="dislike">포도</span>  
+    냄새가 많은 <span class="dislike">두리안</span>
+
+</body>
+</html>

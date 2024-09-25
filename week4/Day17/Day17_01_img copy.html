@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 읽어오기</title>
+</head>
+<body>
+    <!-- 파일 찾기에서 포멧설정 -->
+     <input type="file" id="imgFile" accept="image/*" multiple>
+     <img src="" style="max-width: 300px;" id="preview" alt="">
+     <script>
+        document.getElementById('imageFile').addEventListener('change',function(e){
+           let file =e.target.files;
+           if(file.length>0){
+            for(let i =0; i<file.length; i++){
+                let file= files[i];
+                if(file && file.type.match('image.*')){
+                    let reader = new FileReader();
+                    reader.onload = function(event){
+                        let imgElement = document.createElement('img');
+                        imgElement.src = event.target.result;
+                        imgElement.style.minWidth ='200px'
+                        imgElement.style.minHeight ='300px'
+                        document.body.appendChild(imgElement)
+                    }
+                    reader.readAsDataURL(file)
+                }else{
+                    console.log(file.name,'유효한 파일 아님')
+                }
+            }
+           }
+        })
+     </script>
+</body>
+</html>

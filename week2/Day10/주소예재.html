@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function fn_search(){
+            new daum.Postcode({
+                    oncomplete: function(data) {
+                        console.log(data);
+                        console.log(data.adress);
+                        console.log(data.zonecode);
+                       
+                        document.getElementById('addr').value = data.adress;
+                        document.getElementById('zipcode').value = data.zonecode;
+                    }
+                }).open();
+                
+                
+                }
+</script>
+
+
+        
+   
+</head>
+<body>
+    주 &nbsp; &nbsp; &nbsp; &nbsp;소 : <input type="text" id="addr" size="50" onclick="fn_search()" readonly>
+    우편번호 : <input type="text" id="zipcode" onclick="fn_search()" readonly>    
+</body>
+</html>

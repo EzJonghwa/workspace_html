@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+
+        let temp =  `<div class="template">
+        <input type="text" placeholder="입력하세요" name="" id=""> <button type="button" class="removeInput">-</button>
+        </div>`;
+
+        $(document).ready(function(){
+
+        $('#addBtn').click(function(){
+        
+            $('#InputContainer').append(temp)
+
+            $('.removeInput').click(function(){
+                $(this).closest('.template').remove()
+            })
+
+         })
+        // document onload 이후 생성된 엘리먼트는 #('.ex'). <-  이렇게 안찾아짐
+        // $(document).on or $(onload 이전에 있었던 엘리먼트 셀렉터).on ('이벤트','대상','함수')
+        
+        // $('#InputContainer').on('click','.removeInput',function(){
+        //     $(this).closest('.template').remove()
+        //     // 이후에 생성되는 엘리먼트 이기에  
+    // })
+
+
+})
+
+
+        
+    </script>
+</head>
+<body>
+    <h2>
+        Dynamic Input Fields
+    </h2>
+    <button id="addBtn">+</button>
+    <div id="InputContainer">
+
+
+    </div>
+    
+</body>
+</html>

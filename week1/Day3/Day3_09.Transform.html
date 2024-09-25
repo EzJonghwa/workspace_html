@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+    <style>
+        
+        #ex { position: relative; width: 500; height: 150px;
+        margin: 0; border: 1px solid aquamarine;}
+        .box{ font-size: 12px; position: relative; width: 60px; height: 60px;
+        margin-bottom: 10px; background-color: gray;}
+        #ex:hover .box{transform: rotate(720deg); margin-left: 420px;}
+        #no-delay{transition-duration: 3s; border: 1px solid orange;}
+        #delay{
+            transition-duration: 3s; border: 1px solid blue; transition-delay: 1s;
+        }
+    </style>
+</head>
+<body>
+    <div id="ex">
+        <div id="no-delay" class="box">
+            <p>no-delay</p>
+        </div>
+        <div id="delay" class="box">
+            <p>delay</p>
+        </div>
+    </div>
+</body>
+</html>

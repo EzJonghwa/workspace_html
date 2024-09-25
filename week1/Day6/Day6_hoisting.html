@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 호이스팅</title>
+
+    <script>
+
+        /*
+            hoist 끌어 올리기
+            모든변수(식별자) 선언은 호이스트됨.
+            변수의 정의가 그 범위에 따라 선언과 할당으로 분리
+            변수가 함수 내에서 정의되었을 경우 선언이 함수의 최상위로
+            함수바깥에서 선언되었을 경우 전역 컴텍스트의 최상위로 변경됨.
+
+            다른언어의 경우 변수를 선언하지않고 호출하는 경우 오류가 나지만
+            자바스크립트에서는 undefied  라고 넘어감.
+
+            선언문은 항시 자바 스크립트 엔진 구동시 최우선으로 해석
+            할당구분은 런타임 과정에서 이루어짐.
+        */
+
+
+       ex2();// 선언적 함수를 호이스팅되었기 때문에 오류나지 않음.
+       function ex2(){ // 선언적함수는 최우선 으로해석됨.
+        console.log (z); //undefied 출력됨.
+        console.log ('hi');
+        var z =100;
+        console.log (z); 100 
+
+       }
+
+       
+       //ex1 변수는 호이스트 되지만 할당구분은 런타임과정에서 이루어짐.
+       //ex1(); 오류남
+       let ex1= function(){
+        console.log("Hello");
+       }
+       
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

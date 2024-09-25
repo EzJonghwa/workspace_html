@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동기 비동기</title>
+</head>
+<body>
+    <script>
+        let a ='순서1';
+        let b ='순서2';
+        let c ='순서3';
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        // 자바스크립트는 기본 동기식으로 동작함 (순서대로)
+        console.log('비동기');
+        console.log(a);
+        setTimeout(()=>{console.log(b)},1000);
+        console.log(c);
+
+        let test2 = async ()=>{
+            // await 는 비동기 함수를 동기식으로 기다림
+            // await 는 async 함수만 사용가능(함수명 앞에 async 붙여야함)
+            let res = await fetch("https://api.upbit.com/v1/market/all");   // await - 비동기르 기다리는 표현방법
+            // 정상 처리가 될 때 까지 기다린다
+            // promise 객체가 정상처리 or 거부의 결과가 나올때  
+            console.log('test2 res:',res)
+            let result = res.json();
+            console.log('test2 result:',result);
+            result.then(function(data){
+                console.log('test2 data:',data);
+            })
+        }
+        test2();
+
+
+
+
+
+        let test = ()=> {
+            //fetch 는 javascript 에서 네트워크 요청을 보내고 그 결과를 처리하는데 사용되는 aPI
+            //fetch 는 promise 를 반환하여 비동기 작업 처리에 유용함
+        let res = fetch("https://api.upbit.com/v1/market/all");
+        console.log(res);
+        //promise 는 3가지 상태를 가짐
+        // 1. 대기(pending) : 초기상채 비동기 작업이 아직 완료되지 않은 상태
+        // 2. 이행(fulilled) :성공적으로 완료된 상태then 메서드 로 결과를 받을 수있음.
+        // 3. 거부 (rejected) : 비동기 작업 실패한 상태 catch 로 오류를 처리 할 수있음
+        let result = res.json();
+        console.log(result);    // 오류남
+        }
+        test();
+    </script>
+</body>
+</html>

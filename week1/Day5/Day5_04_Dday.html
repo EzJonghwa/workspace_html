@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-day 계산기</title>
+   
+</head>
+<body>
+    <h3>우리 만난지....</h3>
+    <hr>
+    <div id="view">
+
+    </div>
+
+
+    <script>
+        // 기념일을 입력받아
+        // 100,200,365일 계산.
+        console.log(new Date(1723097956750));
+
+        function fn_dday(days){
+            let today = new Date();
+            let todatTime = today.getTime();
+            let future = todatTime+ (days * (1000*60*60*24));
+            console.log(days+ "일:",new Date(future));
+            let someDay = new Date(future);
+            let year = someDay.getFullYear();
+            let month = someDay.getMonth()+1;
+            let day = someDay.getDate();
+            document.getElementById("view").innerHTML += days +"일은 :"+year+"."+month+"."+day+"<br>";
+            // id 를 document 안에서 view 를 찾아 이너 html 안에 텍스트를 입력한다.
+            
+        }
+        fn_dday(100);
+        fn_dday(200);
+        fn_dday(365);
+    </script>
+    
+    
+</body>
+</html>

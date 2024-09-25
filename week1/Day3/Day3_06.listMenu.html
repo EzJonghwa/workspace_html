@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List menu</title>
+    <style>
+        html{size: 100%;}
+        
+        body{
+            background-image: url("./img/bali.jpg");
+            background-size: cover;
+            /* 전체 영역을 커버하도록 */
+            background-repeat: no-repeat;
+            /* 반복하지 않기 */
+            width :100%;
+            height: 100%;
+            overflow: hidden;
+            /* 넘치면 무시(스크롤x) */
+        }
+        nav{background-color: rgb(19, 165, 63); opacity: 0.8;}
+
+        li{
+            list-style-type: none; display: inline; padding: 0px 15px
+        } /*마커 삭제*/
+        a {
+            text-decoration: none; color :white
+        }
+        a:hover{
+            color: aquamarine; opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 시멘틱 태그 -->
+     <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Kuta</a></li>
+            <li><a href="#">seminyak</a></li>
+            <li><a href="#">ubed</a></li>
+        </ul>
+     </nav>
+    
+</body>
+</html>

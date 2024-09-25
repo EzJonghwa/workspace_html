@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image 객체</title>
+    <style>
+        img {width:500px;}
+    </style>
+    <script>
+        let fiels = ["./img/2.jpg","./img/3.jpg","./img/1.jpg"];
+        let imgs=[];
+
+        for(let i=0; i<fiels.length; i++){
+            imgs[i] = new Image();  // 해당 이미지 객체생성
+            imgs[i].src = fiels[i]  // 해당 이미지 객체에 이미지 위치 지정 (load 이벤트가 일어남)
+        }
+        let next =1;
+       
+        function change(obj){
+            obj.src = imgs[next].src;
+            next ++;
+            next %= imgs.length;// 개수를 넘으면 처음으로 
+        }
+        let myImg;
+        let interval;
+            window.onload = function(){
+            document.getElementById('img_id')
+            interval = setInterval(fn_right,1000);
+
+            myImg.onmouseover =function(){
+                clearInterval(interval);
+                myImg.setInterval.opacity = 0.5;
+            }
+            myImg.onmouseout = function(){
+                interval = setInterval(fn_right,1000);
+                myImg.setInterval.opacity = 1;
+            }
+        }
+        function fn_left (){
+            if (next ==0){
+                next = imgs.length-1;   // 마지막 이미지가 나오도록
+            }else {
+                next --;
+            }
+            img_id.src = imgs[next].src
+        }
+
+        function fn_right(){
+            if (next== imgs.length-1){      // 현재 인덱스가 마지막 이미지라면 처음으로
+                next =0;
+            } else{
+                next++;
+            }
+            img_id.src = imgs[next].src
+        }
+        
+
+    </script>
+</head>
+<body>
+    <h3>이미지를 클릭하면 다음이미지를 보여줍니다.</h3>
+    <hr>
+    <div>
+        <button type="button" onclick="fn_left()"> < </button>
+        <img src="./img/1.jpg" id="img_id" onclick="change(this)">
+        <button type="button" onclick="fn_right()"> > </button>
+    </div>
+    
+</body>
+</html>

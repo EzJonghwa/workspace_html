@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input radio</title>
+    <script>
+        function fn_click(){
+            let founds =null;
+
+            let citys = document.getElementsByName("city");
+            for (let i =0; i<citys.length; i++){
+                // checkbox radio 는 속성에 checked 속성이 있음
+                // 디폴트 :false
+                if (citys[i].checked ==true){
+                    founds = citys[i];
+                }
+            }
+            if(founds != null){
+                alert(founds.value + "이 선택됨")
+            }else{
+                alert("선택 된게 없음");
+                citys[0].focus();
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <h3>선택 라디오 버튼의 value 가져오기</h3>
+    <hr>
+    <form action="" method="get">
+        <input type="radio" name="gender" value="F"> 여자
+        <input type="radio" name="gender" value="M"> 남자 <br>
+        <!--name 이 같으면 선택지중 하나만 선택이 가능 -->
+        <input type="radio" name="city" value="seoul"> 서울
+        <input type="radio" name="city" value="busan"> 부산
+        <input type="radio" name="city" value="daejeon" checked="checked"> 대전 <br>
+        <input type="button" value="선택값 가져오기" onclick="fn_click()">
+        <input type="submit" value="전송">
+        <input type="reset" value="reset">
+    </form>
+</body>
+</html>

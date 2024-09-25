@@ -1,0 +1,52 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script>
+            var ap_url = "https://api.odcloud.kr/api/3059715/v1/uddi:8d75f491-3778-47d4-92e8-a3b7846449a6"
+            let seKey = "YEaM+ygpqr5x3CB5YLcIxFE3omTMzjYfnJYz0xVrqMJQEJV2giPIAlVFFGm0nlwrQYbD/yVZMA3q1OWYgS+9Kw=="
+
+
+            $(document).ready(function(){
+                $('#btn').click(function(){
+                    let pages = $('#page').val();
+                    let pPages = $('#pPage').val();
+                    let addr = [];
+                    $.ajax({
+                        url :ap_url,
+                        type: 'GET',
+                        dataType :'xml',
+                        data:{
+                            perPage:pPages,
+                            page:pages,
+                            serviceKey: seKey
+
+                        },
+                        success : function(res){
+                            // console.log(res);
+                            $(res).find('item').each(function (i, v) {
+                                let nm = $(v).find('서명').text();
+                                addr.push({ '서명': nm });
+                                console.log(addr);
+                            });
+                        },
+                        error: (function(e){
+                            console.log(e);
+                        })
+
+
+                    })
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <input type="text" id="page" value="1">
+        <input type="text" id="pPage" value="10">
+        <button id="btn">가져오기</button>
+        <div id="view"></div>
+    </body>
+    </html>

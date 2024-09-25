@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체</title>
+
+    <script>
+        let obj = new Object();
+        let obj2 = {};
+
+        obj.nm ="미래융합";
+        obj.hp = "0424719222";
+        obj2['nm'] = "교육원";
+        obj2.hp = "0424719222";
+        obj2.hp = "042";
+        console.log(obj,obj2);
+        // 객체 for 문
+        for (let key in obj){ // in 앞에 오는 인자는 키가옴
+            console.log("key:",key);
+            console.log("value:",obj[key]);
+        }
+        // 객체의 key 정보만 필요할 떄
+        let keys = Object.keys(obj);
+
+        // 객체의 value 정보만 필요할 때
+        let value = Object.values(obj);
+        console.log(keys,value);
+        let KeyValue = Object.entries(obj);
+        console.log(KeyValue);
+
+        // 객체의 복사(주소만 복사됨)
+        let copy_obj = obj;
+        copy_obj['nm'] = "과거융합";
+        console.log(obj,copy_obj);
+
+        //깊은 복사
+
+        let copy2_obj =JSON.parse(JSON.stringify(obj2));
+        copy2_obj['nm'] = "future"
+        console.log(obj2.copy2_obj);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

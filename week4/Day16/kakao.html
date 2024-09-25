@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- 카카오 지도 API -->
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c52ae2f3d4ee4e027a63decba491cd84"></script>
+    <script>
+        var api_url = 'http://apis.data.go.kr/6300000/pis/parkinglotIF';
+        let api_key = '01/u7SxCxMdAKSpKhhWj/x4Qh9TmVtiTH+IWuVKC1G55zIZzc/J61x4mSkmjAoWE7G7YJgmM8tQzmQs+6dGdng==';
+
+        $(document).ready(function () {
+            $('#btn').click(function () {
+                let rows = $('#rows').val();
+                let pages = $('#page').val();
+                let addr = [];
+
+                $.ajax({
+                    url: api_url,
+                    type: 'GET',
+                    dataType: 'xml',
+                    data: {
+                        serviceKey: api_key,
+                        numOfRows: rows,
+                        pageNo: pages
+                    },
+                    success: function (res) {
+                        // XML 데이터에서 정보 추출
+                        console.log(res);
+                        $(res).find('item').each(function (i, v) {
+                            let nm = $(v).find('name').text();
+                            let lat = $(v).find('lat').text();
+                            let lon = $(v).find('lon').text();
+                            addr.push({ 'title': nm, 'lat': lat, 'lon': lon });
+                            console.log(nm);
+                        });
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    },
+                    complete: function () {
+                        console.log('== complete ==');
+                        console.log(addr);
+
+                        if (addr.length > 0) {
+                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+                                mapOption = {
+                                    center: new kakao.maps.LatLng(addr[0]['lat'], addr[0]['lon']), // 지도의 중심좌표
+                                    level: 3 // 지도의 확대 레벨
+                                };
+
+                            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                            // 마커 배열 생성
+                            var positions = [];
+
+                            for (let i = 0; i < addr.length; i++) {
+                                positions.push({
+                                    title: addr[i]['title'],
+                                    latlng: new kakao.maps.LatLng(addr[i]['lat'], addr[i]['lon'])
+                                });
+                            }
+
+                            console.log(positions);
+
+                            for (var i = 0; i < positions.length; i++) {
+                                var marker = new kakao.maps.Marker({
+                                    map: map, // 마커를 표시할 지도
+                                    position: positions[i].latlng, // 마커를 표시할 위치
+                                    title: positions[i].title // 마커의 타이틀
+                                });
+                            }
+                        } else {
+                            console.log("No address data available");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input type="text" id="rows" value="3">
+    <input type="text" id="page" value="1">
+    <button id="btn">가져오기</button>
+    <div id="map" style="width: 100%; height: 800px;"></div>
+</body>

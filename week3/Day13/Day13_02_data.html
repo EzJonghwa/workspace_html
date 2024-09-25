@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 데이터</title>
+</head>
+<body>
+    <script>
+        // javascript ovject motaion
+        // 통신간에 데이터 교환 수단으로 사용됨.
+        // 숫자, 문자열, 불리언, 배열, 객체를 표현 할 수 있음.
+        let data = `{"name":"펭수","age":10,"hobby":["노래","춤"]}`;
+        console.log(data);
+        // 문자열 to 객체
+        let obj = JSON.parse(data);
+        console.log(obj); // parse 로 객체를 변환하면 객체로 다룰 수있음.
+        obj['use_yn']=true;
+        let str = JSON.stringify(obj);
+        console.log(str);
+    </script>
+</body>
+</html>

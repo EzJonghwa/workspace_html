@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력사이즈로 table 만들기</title>
+</head>
+<body>
+    <h3>사용자의 입력 사이즈 만큼 행,열 만들기</h3>
+    <hr>
+    <script>
+        let size =prompt("몇 x 몇 사이즈로 만들까요?");
+        size = parseInt(size);
+        document.write("<table border='1' >");
+            //입력받은 수 만큼 <tr> <td> 만들기
+                // 반복 ixj 
+                // i의 범위 
+                // j의 범위
+                
+            for(let i =1; i<=size ; i++ ){
+                document.write("<tr>");
+                for(let j=1; j<=size; j++ ){
+                    document.write("<td>");
+                    document.write(i + "x" + j);
+                    document.write("</td>");
+                }
+               document.write("</tr>");
+            }
+        document.write("</table>");
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* *은 전체 */
+        * { text-align: center; position: relative; top: 50px;}    
+        body {background-color: black;}
+        #date{ font-size: 30px; color: blue;}
+        #time{font-size: 40px; color: purple;}
+        h3{color: whitesmoke;}
+    </style>
+    <script>
+              
+            function fn_setClock(){
+                let now = new Date();
+                let year = now.getFullYear();
+                let month = ("0"+ (now.getMonth()+1)).slice(0,2);
+                let day = ("0"+now.getDate()).slice(0,2);
+                let hour = now.getHours(); 
+                let min = ("0"+now.getMinutes()).slice(0,2); 
+                let sec = ("0"+now.getSeconds()).slice(0,2); 
+                
+                document.getElementById("date").innerHTML += year+"년 "+month+"월 "+day+"일";
+                document.getElementById("time").innerHTML += hour+":"+min+":"+sec;
+        
+                // 예시 
+                // document.getElementById("date").innerHTML = now.toString();
+                //------ 오늘의 문제 -------
+                //date 쪽은 YYYY년 MM월 DD일 
+                //time 쪽은 HH:MM:DD  로 출력하시오 
+                //만약 1월이라면 01로 출력, 1초라면 01로 출력
+
+            }
+            //브라우저에서 화면을 다 로드한뒤 
+            window.onload = function(){
+
+                // setInterval은 반복적으로 어떤 기능을 실행야 할때 사용.
+                // 첫번째 매개변수는 함수, 두번째 매개변수는 반복 시간 1000 <--1초
+
+                fn_setClock();
+                setInterval(fn_setClock,1000);                // 로드 되자마자 한번 출력 
+                
+                // 1초 후마다 출력
+            }
+    </script>
+</head>
+<body>
+    <h3>메인화면</h3>
+    <div id="time"></div>
+    <div id="date" ></div>
+</body>
+</html>

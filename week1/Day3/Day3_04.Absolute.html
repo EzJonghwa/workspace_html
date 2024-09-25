@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>absolute 절대위치</title>
+    <style>
+        div,img{position:absolute;}
+        #img1 {z-index: 10;}
+        #img2 {z-index:-10; left: 50px; top: 50px;}
+    </style>
+
+</head>
+<body>
+    <h1>z-index 와 absolute로 앞뒤에 위치시키기</h1>
+    <hr>
+    <div>
+        <img src="./img/apple.PNG" id="img1" alt="">
+        <img src="./img/banana.PNG" id="img2" alt="">
+    </div>
+</body>
+</html>

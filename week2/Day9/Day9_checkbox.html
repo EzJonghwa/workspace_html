@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input checkbox</title>
+    <script>
+        function fn_check(){
+            let objs = document.getElementsByName('hobby');
+            let msg = "당신의 취미는 ";
+            for (let i=0; i<objs.length; i++){
+                if (objs[i].checked){
+                msg += objs[i].value + ":" + objs[i].parentElement.innerText;
+            }
+        }
+        alert(msg+"입니다.")
+    }
+    function fn_all(obj){
+        console.log(obj);
+        console.log(obj.checked);
+
+        let flag = obj.checked;
+        let arr = document.getElementsByName('hobby');
+        for (let i=0; i<arr.length; i++){
+                arr[i].checked = flag;
+        }
+        
+        //해당 boolean 값으로 hobby check 의 check속성값 변경
+    }
+    </script>
+</head>
+<body>
+    <div>
+        <h3>취미를 선택하세요</h3>
+        <span id ='all'>
+            <label for="">전체 <input type="checkbox" id="all" onchange="fn_all(this)"></label>
+        </span>
+    </div>
+    <div>
+        <form action="#">
+            <label for="read">독서<input checked="checked" type="checkbox" name="hobby" id="read" value="read"></label>
+            <label for="game">게임<input type="checkbox" name="hobby" id="game" value="game"></label>
+            <label for="cook">요리<input type="checkbox" name="hobby" id="cook" value="cook"></label>
+            <label for="surf">서핑<input type="checkbox" name="hobby" id="surf" value="surf"></label>
+            <input type="button" onclick="fn_check()" value="확인">
+            <input type="reset" value="초기화">
+        </form>
+    </div>
+</body>
+</html>

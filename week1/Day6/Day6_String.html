@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js 문자열 메소드</title>
+</head>
+<body>
+    <script>
+        let a = "boys and Girls";
+        let displayText = "";
+        let index = 0;
+
+        //concat == 문자열 +문자열
+        console.log (a.concat("입니다."));
+        console.log(a.indexOf("s"));    // 있으면 인덱스 리턴
+        console.log (a.indexOf("S"));   // 없으면 -1 리턴
+        console.log(a.slice(5,8));      // 인덱스로 가져오기
+        console.log(a.substr(5,3));     // 5인덱스뒤 3자리
+        let sub = a.split(" ");         // 구분자로 잘라서 베열로 리턴
+        console.log(sub);
+        // 옆으로 흘러가는 효과
+
+        function scrollText(){
+               let displayText = document.getElementById('view').innerHTML;
+               document.getElementById('view').innerHTML =
+                                displayText.slice(1) + displayText.slice(0,1);
+            }
+            window.onload =function(){
+                setInterval(scrollText,100);
+            }
+
+    </script>
+    <div id="view">
+
+            boys and Girls
+
+    </div>
+</body>
+</html>

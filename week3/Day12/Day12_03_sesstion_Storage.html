@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세션 스토리지</title>
+</head>
+<body>
+    <h3> 세션 스토리지</h3>
+    <hr>
+    item : <input type="text" id="item">
+    cnt : <input type="text" id="cnt">
+    <button id="save" onclick="fn_save()">저장</button>
+    <button id="search" onclick="fn_search()">검색 </button>
+    <div id="content"></div>
+    <script>
+        function fn_save(){             
+            let item = document.getElementById('item');
+            let cnt = document.getElementById('cnt');
+            sessionStorage.setItem(item.value, cnt.value);
+            item.value="";
+            cnt.value="";
+        }
+        function fn_search(){
+            let item = document.getElementById('item');
+            let val = sessionStorage.getItem(item.value);
+            let str = "";
+            if (val ==null)
+            {
+                str +="없음"
+            }else{
+                str += "key:"+item.value+"/value:" +val +"<br>"
+
+            }
+            document.getElementById('content').innerHTML =str;
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션과 메소드 체이닝</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+
+            $('#btn1').click(function(){
+
+                $('#apple').animate({left:'100px',top:'100px'},"slow");
+                
+            });
+            $('#btn1').dblclick(function(){
+
+                $('#apple').animate({left:'0px',top:'0px'},"fast");
+            });
+            $('#btn2').click(function(){
+                $("#banana").fadeOut();
+            })
+            $('#btn2').dblclick(function(){
+                $("#banana").fadeIn().fadeOut('slow').slideDown(5000);
+            })
+
+            $('#btn3').click(function(){
+                alert($("#apple").attr('src'));
+                $("#apple").attr('src','../ex_mole/두더지.PNG');
+            });
+     
+        });
+
+        $(document).mousemove(function(e){
+            $('#log').text("x:" + e.offsetX+ "y:"+e.offsetY);
+        });
+    </script>
+</head>
+<body>
+    <button id="btn1">animate()</button>
+    <button id="btn2">fadeOut</button>
+    <button id="btn3">변경</button><br>
+    <img src="../img/apple.PNG" id="apple" width="80" height="80" style="position: relative;" alt="">
+    <img src="../img/banana.PNG" id="banana" width="80" height="80" style="position: relative;" alt="">
+    <div id="log">
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두더지 게임</title>
+    <style> .game-board { width: 600px; height: 600px; position: relative;}
+            .mole { width: 100px; height: 100px; 
+                    position: absolute;
+                    display: none;  
+                    }
+            .mole:hover { cursor: pointer;}
+            .mole:active {opacity: 0.5;}
+    </style>
+</head>
+<body>
+ 
+
+    <h1>점수 : <span id="score">0</span></h1>
+    <h1>남은시간: <span id="time">30</span></h1>
+    <div class="game-board">
+        <img src="두더지.PNG" class="mole" id="mole" alt="">
+    </div>
+       <!--
+        1. 일정 시간마다 나타나게 showMold 함수
+        -이미지의.style.display 를 block로
+        2. 사라지게     hideMole 함수 -display none
+        3. 랜덤한 위치 
+        4. 점수 계산 (클릭이벤트)
+    -->
+    <script>
+             let score = 0;     // 게임점수
+             let time = 30;      // 시간
+             let gameInterval;  // 특정시간마다 반복시킬
+             let mole = document.getElementById('mole');
+             let spanScore = document.getElementById('score');
+             let spanTime = document.getElementById('time');
+
+
+
+             if (confirm('start?')){
+                gameInterval= setInterval(showMole,2000);
+             }else{
+                location.reload();
+             }
+            showMole();
+            function showMole(){
+                randomPosition();
+                mole.style.display= 'block';
+                setTimeout(hideMole,1000);
+            }
+
+            function hideMole(){
+                mole.style.display='none';
+            }
+            // 일정시간동안 사라지고 나타나게
+
+
+
+            function randomPosition(){
+                let x = Math.floor(Math.random()*500);
+                let y = Math.floor(Math.random()*500);
+                mole.style.left = `${x}px`;
+                mole.style.top = `${y}px`;
+            }
+          
+            mole.addEventListener("click",function(){
+                score++;
+                spanScore.innerHTML= score;
+                hideMole();
+
+            });
+
+            // 시간감소
+            let timeInterval = setInterval(function(){
+                time--;
+                spanTime.innerHTML=time;
+                if (time ==0){
+                    clearInterval(gameInterval);
+                    clearInterval(timeInterval);
+                    alert(`게임 종료 당신의 점수는 ${score} 점 입니다`);
+                    location.reload();
+                }
+
+
+            },1000)
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

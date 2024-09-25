@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div id="container">
+        <h1>회원가입</h1>
+        <form action="#" id="register">
+            <ul>
+                <li>
+                    <label for="user-id" class="field">아이디</label>
+                    <input type="text" id="user-id" placeholder="4~15자리 입력" required>
+                </li>
+                <li>
+                    <label for="user-pw" class="field">비밀번호</label>
+                    <input type="password" id="user-pw" placeholder="8자리 이상" required>
+                </li>
+                <li>
+                    <label for="user-pw2" class="field">비밀번호 확인</label>
+                    <input type="password" id="user-pw2" required>
+                </li>
+            </ul>
+            <ul id="button">
+                <li>
+                    <button type="button" onclick="fn_save()">가입하기</button>
+                </li>
+                <li>
+                    <button type="button">닫기</button>
+                </li>
+            </ul>
+        </form>
+        <script> 
+
+             let userId = document.getElementById('user-id');
+             let pw1 = document.querySelector('#user-pw');
+             let pw2 = document.querySelector('#user-pw2');     //css 셀렉터로 가져오기 #
+            userId.onchange = checkId;
+            pw1.onchange=checkPw;
+            pw2.onchange=comparePw;
+            function checkId(){
+                if(userId.value.length <4 || userId.value.length>15){
+                    alert ("4~ 15자리로 작성!!")
+                    userId.value="";
+                    userId.focus();
+
+                }
+            }
+            function checkPw(){         
+                if(pw1.value.length<8){
+                    alert("8자리 이상으로 작성!!")
+                    pw1.value='';
+                    pw1.focus();
+                }   
+            }
+            function comparePw(){
+                if(pw1.value!=pw2.value){
+                    alert("패스워드가 다릅니다!!")
+                    pw2.value='';
+                    pw2.focus();
+                }
+            }
+            function fn_save(){
+                let val = localStorage.getItem(userId.value);
+                if (val != null){
+                    alert(userId.value + "는 동일 아이디 회원이 있음...");
+                    return;
+                }
+                localStorage.setItem(userId.value, pw1.value);
+                window.close();
+
+                
+            }
+
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트와 이벤트 객체</title>
+    <script>
+
+        function fn_msg(e){
+            console.log(e);
+            console.log(e.x);
+            console.log(e.y);
+        }
+
+        function fn_init(){
+            let p = document.getElementById("p_id");
+            p.onmouseover = fn_msg; // 객체 이벤트 리스너 프로퍼티에 등록
+            // fn_msg 함수의 첫번째 매게변수로 e가 있는데
+            // 객체에 프로퍼티로 이벤트리스너에 등록할때 첫번째 매개변수는 
+            // 디폴트로event 객체
+        }
+
+        function fn_move(e){
+            let view = document.getElementById("view");
+            let str = "(screenX, y)=" + e.screenX + "," + e.screenY +"<br>";
+                str += "(offsetX, y)=" + e.offsetX + "," + e.offsetY +"<br>";
+            view.innerHTML = str;
+
+        }
+        //이벤트 리스너 등록방법 3.addEventListner
+        document.addEventListener("contextmenu", 
+        function(){
+            event.preventDefault();
+            // addEventListener ('이벤트명','적용함수',boolean)
+        },true); // 3번째 매개변수는 디폴트 false(bubble단계)    true(캡쳐단계)
+    </script>
+
+</head>
+<!-- hrml element 이벤트리스너에 등록 -->
+<body onload="fn_init()">
+    <p id="p_id">마우스를 올려보세요</p>
+    <button type="button" onclick="fn_msg(event)"> 클릭 하세요</button>
+    <img src="../img/apple.PNG" onmouseover="fn_move(event)" alt="">
+    <div id="view" style="width: 250px;"></div>
+
+</body>
+</html>

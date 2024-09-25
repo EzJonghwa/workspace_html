@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xml파일 가져오기</title>
+</head>
+<body>
+    <h2>
+        employee list
+    </h2>
+    <hr>
+    <button onclick="fn_get()">가져오기!</button>
+    <ul id="employee">
+    </ul>
+    <script>
+        function fn_get(){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','./data/ex.xml',true);
+            xhr.onreadystatechange =function(){
+                if (xhr.readyState =4 && xhr.status ==200){
+                    console.log(xhr.responseText); 
+
+                    // XMl 파싱
+                    let xmlDoc = xhr.responseXML;
+                    let employees = xmlDoc.getElementsByTagName("employee");
+                    console.log(employees);
+                    for (let i =0; i<employees.length; i++){
+                        let firstName = employees[i].getElementsByTagName('firstName')[0].textContent;
+                        console.log(firstName);
+                    }
+            }
+        }
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 읽어오기</title>
+</head>
+<body>
+    <!-- 파일 찾기에서 포멧설정 -->
+     <input type="file" id="imgFile" accept="image/*">
+     <img src="" style="max-width: 300px;" id="preview" alt="">
+     <script>
+        document.getElementById('imageFile').addEventListener('change',function(e){
+            console.log(e.target);
+            let file = e.target.file[0];
+            console.log(file);
+            if(file && file.type.match('image.*')){
+                let reader = new FileReader();
+                reader.onload = function(event){
+                    document.getElementById('preview').src = event.target.result;
+                }
+                // 파일을 읽고 그 내용을 데이터 url로 변환
+                reader.readAsDataURL(files)
+            }else{
+                alert('유효한 이미지 파일을 선택하세요!!')
+            }
+        })
+     </script>
+</body>
+</html>

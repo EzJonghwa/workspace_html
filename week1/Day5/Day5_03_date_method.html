@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날짜 객체</title>
+</head>
+<body>
+
+    <script>
+
+
+    <!-- 코어 객체 Date -->
+     let now = new Date();
+     console.log('now:',now)
+     console.log('getDate:',now.getDate());
+     console.log('getMonth:',now.getMonth());       //일
+     console.log('getMonth:',now.getMonth() + 1);   // 월 (0부터 시작)
+     console.log('getFullYear:',now.getFullYear()); // 년
+     // UTC 기준시 전세계 시간 표준화를 위한 기준시간
+     // 1970년 1월 1일 00:00:00 부터 ~현재까지의 밀리초
+     //
+     console.log('getTime:',now.getTime());         // 월 (0부터 시작)
+    console.log("toUTCString:", now.toUTCString());
+
+    let startDate = prompt("기념일 시작!","ex) 2024-08-02");
+    let date = new Date(startDate); // 입력받은날짜의 날짜객체 생성
+    console.log(date);
+
+    //  오늘날짜
+    let today = new Date();
+    let today_time = today.getTime();
+    let start_time = date.getTime();
+
+    let secTime = today_time - start_time;
+    console.log (secTime);
+    // 시간 * 분 * 초 * 밀리초 -> 일자
+    // Math 코어 객체 (다양한 수학관련 매서드가 있음)
+    // ceil 올림 floor 버림 round 반올림
+    let day =Math.ceil(secTime / (24 * 60 * 60 * 1000));
+    console.log(day);
+
+
+     document.write("<h1>"+now.getFullYear() + "년 " +now.getMonth()+ "월 " 
+    +now.getDate()+"일"+"</p>");
+    </script>
+
+</body>
+</html>

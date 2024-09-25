@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>워드 클라우드</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.0/wordcloud2.js"></script>
+</head>
+<body>
+    <input type="file" onchange="readFile(this)">
+    <canvas id="myCanvas" width="800px" height="600px"></canvas>
+    <script>
+        //readFile 함수 추가
+        // 1. input type=file 파일 선택을 하면 readFile 호출
+        // 2. FileReader 가 onload 되면 countWords 호출
+        // 3. wordCloud 사용 파일 형태로 변경 후 워드 클라우드 생성
+
+        let reader = new FileReader();
+            reader.onload = function(e){
+                let data = e.target.result;
+                console.log(data);
+                console.log(countWords(data));
+                
+            }
+
+            function readFile(obj){
+                let files = obj.files;
+                for(let i=0; i<files.length; i++){
+                    let file = files[i];
+                    console.log(file.name)
+                    console.log(file.type)
+                    console.log(file.size);
+                    if(file.name.indexOf('.txt')){
+                        reader.readAsText(file)
+                    }
+                }
+            }
+
+        function countWords(doc){
+            let counts ={};
+            //1. 띄어쓰기를 기준으로 배열로
+            //2. 영문은 소문자로 변경 
+            //3. 1글자 이상만 +10 
+ 
+            let arr =doc.split(' ');
+              
+                for (let word of arr){
+                    word = word.trim();
+                    
+                    console.log(word);
+                    if (word != '' && word.length>1){
+                        // 최초면 10 , 아니면 +10
+                        counts[word] = counts[word] ? counts[word] +10.0 : 100;
+                    }
+                }
+    
+            return counts;
+
+        }
+        let obj = countWords();
+        let wordCloudArr =[ ];
+        for(let key in obj){
+            wordCloudArr.push([key,  obj[key]]); // [[java:30][css:20]]
+            
+        }
+        WordCloud(document.getElementById('myCanvas'),{
+            list:wordCloudArr
+        ,backgroundColor :'black'
+        ,fontSize:{form:100, to:200}
+        });
+
+    </script>
+</body>
+</html>

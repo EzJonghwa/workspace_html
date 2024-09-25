@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form 태그 전송</title>
+</head>
+<body>
+    <h3>google 검색</h3>
+    <hr>
+
+    <form action="https://google.com/search" method="get">
+
+        <input type="text" name="q" placeholder="검색하고 싶은 이미지 단어를 작성하세요">
+        <!-- submit은 부모 form 태그의 action 결로로 전송을 함 (모습은 input 이지만 버튼의 모습) -->
+        <input type="submit" value="이미지검색">
+    </form>
+    <h3>naver 검색</h3>
+    <form action="https:/search.naver.com/search.naver" method="get">
+
+        <input type="text" name="query" placeholder="검색하고 싶은 이미지 단어를 작성하세요">
+        <!-- submit은 부모 form 태그의 action 결로로 전송을 함 (모습은 input 이지만 버튼의 모습) -->
+        <input type="submit" value="네이버검색">
+    </form>
+    <!-- name 의 값과 조합되어서 검색이 진행됨  -->
+</body>
+</html>

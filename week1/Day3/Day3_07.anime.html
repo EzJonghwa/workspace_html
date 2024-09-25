@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+    <style>
+        /*정의*/
+
+        @keyframes bomb {
+            0% {font-size: 100%;}
+            50% {font-size: 500%;}
+            100% {font-size: 100%;}
+        }
+        @keyframes colorChange{from {color :blue;}
+                                to {color : red;}}
+        h1{animation-name: bomb; animation-duration: 3s;
+            animation-iteration-count: infinite;}
+        h2{animation-name: colorChange; animation-duration: 1s;
+        animation-iteration-count: infinite;}
+        p{animation-name: bomb; animation-duration: 3s;
+        animation-iteration-count: 1;}
+
+    </style>
+</head>
+<body>
+    <h1>사이즈 변경</h1>
+    <h2>색 변경</h2>
+    <p>1번만</p>
+    
+</body>
+</html>

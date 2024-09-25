@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getCurrentPosition() 현재 위치</title>
+</head>
+<body>
+    <h3>현재 위치는 ?</h3>
+    <hr>
+    <div id="msg">이곳에 위치 정보 출력</div>
+    <script>
+        if(!navigator.geolocation){
+            alert('지원하지 않습니다.')
+        }else{
+            // getCurrentPostion 은 콜백 함수를 매개변수로 받음
+            navigator.geolocation.getCurrentPosition(fn_found)
+        }
+        // 매개변수는 위치정보가 들어있는 position 객체
+        // "위치를 허용 했을 때"
+        function fn_found(pos){
+            console.log(pos)
+        }
+    </script>
+</body>
+</html>

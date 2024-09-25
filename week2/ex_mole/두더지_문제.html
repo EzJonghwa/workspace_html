@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두더지 게임</title>
+    <style> .game-board { width: 600px; height: 600px; position: relative;}
+            .mole { width: 100px; height: 100px; 
+                    position: absolute;
+                    display: block;
+                    
+                    
+                    }
+            .mole:hover { cursor: pointer;}
+            .mole:active {opacity: 0.5;}
+    </style>
+</head>
+<body>
+ 
+
+    <h1>점수 : <span id="score">0</span></h1>
+    <h1>남은시간: <span id="time"></span></h1>
+    <div class="game-board">
+        <img src="두더지.PNG" class="mole" id="mole" alt="">
+    </div>
+       <!--
+        1. 일정 시간마다 나타나게 showMole 함수
+            -이미지의.style.display를 block 으로변경
+        2. 사라지게               hideMole 함수
+            - 이미지의 .style.display를 none 으로 변경
+        3. 랜덤한 위치            randomPosition 함수
+            - 이미지의 style.left
+            - 이미지의 style.top을 랜덤하게 변경
+        4. 점수 계산 (클릭이벤트)& 시간감소 
+            이미지를 클릭했을때 점수증가 1초마다 시간감소
+    -->
+    <script>
+             let score = 0;     // 게임점수
+             let time = 30;      // 시간
+             let gameInterval;  // 특정시간마다 반복시킬
+             let shnnm = Math.random()*600;
+             console.log(shnnm);
+
+            function randomPosition(){
+                
+                let elmon = document.getElementById("mole");
+                elmon.style.left = shnnm +"px"
+                elmon.style.top = shnnm +"px"
+            }
+
+            function showMole(){
+                let elmon = document.getElementById("mole");
+                if (elmon.style.display =='block'){
+                    elmon.style.display = "none";
+                }else{
+                    elmon.style.display = "block";
+                }
+                
+            }
+            function hideMole(){
+                let elmon = document.getElementById("mole");
+                elmon.style.display = none;
+
+            }
+
+            function decTime(){
+                let now = new Date().getTime();
+                document.getElementById("time").innerHTML = (((startTime-now)+time*1000)/1000).toFixed(0);
+            }
+            window.onload = function(){
+                startTime = new Date().getTime();
+                setInterval(decTime,10);
+                setInterval(randomPosition,1000)
+                
+        }
+
+            
+    </script>
+</body>
+</html>

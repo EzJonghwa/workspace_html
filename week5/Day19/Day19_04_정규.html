@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규 표현식 사용</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#numberInput').keyup(function(){
+                // // 'g'는 정규 표현식에서global을 의미함/(전역 검색) g가 없으면 replace가 첫번재 일치만 적용됨.
+                // let text = $(this).val().replace(/[^0-9]/g,'');
+                // $(this).val(text);
+                // 소수점 2째 자리까지 허용
+                let value = $(this).val()
+                let validValue =value.match(/^\d*\.?\d{0,2}/);
+                console.log(validValue);
+                if (validValue){
+                    $(this).val(validValue[0]);
+                }
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="numberInput" placeholder="숫자 입력가능">
+</body>
+</html>

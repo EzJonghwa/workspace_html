@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery 셀렉터</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+        // Jquery는 $ or jQuery 라는 식별지 사용
+        // jQuery 는 기몬적으로 선택되어진 (selector 사용)을 기본으로 시작하기 떄문에
+        // $(document).ready(function)({})을 기본으로 표현함
+        $(document).ready(function(){
+            $("h2").click(function(){
+                $(this).hide('slow');
+            });
+            $("h1").click(function(){
+                $("h2").show('fast');
+            });
+
+            let i =0; 
+            $("div.out").mouseover(function(){
+                $('p:first').text("mouseover");
+                $('p:last').text(++i);
+            });
+            $("div.out").mouseout(function(){
+                $('p:first').text("mouseout");
+            });
+            $('input').focus(function(){
+                $(this).css('background-color','yellow');
+            });
+            $('input').blur(function(){
+                $(this).css('background-color','white');
+            });
+            $('input').keyup(function(){
+                // let text = $("#content").text();
+                // // input 은 val(),  일반 엘리먼트는 text()
+                // $("#content").text(text+ $(this).val());
+                // $(this).val('');
+            });
+            $('input').keypress(function(event){
+                console.log(event);
+                if (event.which==13){
+                    $("#content").text($(this).val());
+                    $(this).val('');
+                }
+            });
+    });
+    </script>
+</head>
+<body>
+    <h2> h2 임니다 ^^</h2>
+    <h1>
+        클릭하면 h2가 나타남
+    </h1>
+    <div class="out">
+        <p> 마유수를 여기로 움작이세요</p>
+        <p>0</p>
+    </div>
+    아이디 : <input type="text" class="content">
+    <div id="content"></div>
+</body>
+</html>

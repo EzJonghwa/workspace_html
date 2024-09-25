@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+</head>
+<body>
+    <h2>식을 입력하새요!</h2>
+    <hr>
+    <script>
+        let msg = prompt("계산식을 입력하세요.");
+        //eval(식) 문자열 서식연산을 계산하고 결과를 리턴함
+        let result = eval(msg);
+        document.write("요청하신" + msg + "결과는" + result +"입니다.")
+    </script>
+    
+</body>
+</html>

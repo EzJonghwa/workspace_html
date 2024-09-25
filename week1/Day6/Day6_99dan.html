@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단 게임</title>
+
+    <script>
+        let startTime;
+        let endTime;
+
+        function makeQuestion(){
+            document.getElementById('answer').value ='';
+            //랜던 수
+            //2 ~ 9
+            const dan = Math.floor(Math.random()*8)+2;
+            const su = Math.floor(Math.random()*9)+1;
+            //문제 생성
+            
+            // tab위의 백틱을 이용해서 변수를 매핑 가능하다
+            const question = `${dan} x ${su} =?`;
+            //==  const question = dan + "x" + su + "= ?";
+
+            document.getElementById('question').innerHTML =  question;
+            document.getElementById("correctAnswer").value = dan * su;
+            startTime = new Date().getTime();   // 구구단 생성시간
+            setInterval(fn_clock,10);
+        }
+
+        //dom객체가 다 만들어지면 onload 이벤트가 발생됨.
+        // onload 이벤트가 발생되면 makeQuestion 함수를 호출하게하는
+        //익명 함수 등록
+
+        window.onload = function(){
+            makeQuestion(); 
+        }
+
+
+        function checkAnswer(){
+            const userAnswer = document.getElementById('answer');
+            const correctAnswer = document.getElementById('correctAnswer').value;
+            if (userAnswer.value == correctAnswer){
+                endTime = new Date().getTime();
+                let sec = ((endTime - startTime) /1000).toFixed(0);
+                alert('정답입니다!' + sec +"초 걸림");
+                makeQuestion();
+            }else{
+                alert('오답!!');
+                userAnswer.value=''; // 틀려서 값을 삭제함
+
+            }
+        }
+        function fn_clock(){
+            let now =new Date().getTime();
+            document.getElementById("userTime").innerHTML = ((now - startTime)/1000).toFixed(2);
+        }
+
+    </script>
+</head>
+<body>
+    <h1>구구단 게임</h1>
+    <div id='question'></div>
+    <input type="number" id="answer" placeholder="답을 입력하세요">
+    <button type="button" onclick="checkAnswer()">확인</button>
+<!-- "input type hidden" 은 보이지않음 -->
+    <input type="hidden" id="correctAnswer">
+    <h3><span id="userTime"></span>초</h3>
+    
+</body>
+</html>

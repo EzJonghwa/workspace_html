@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 데이터 조회</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        // 고유키니까 인터넷에 공유하지 마세요! 
+        const key ="a8bc60af22f46c64f62b3facdb06ab78" ;
+
+       
+        window.onload = function(){
+            let ajax = new XMLHttpRequest();
+            document.getElementById('movieForm').addEventListener('submit',function(e){
+                e.preventDefault();     // 디폴트 행동 취소
+                let dateInput = document.getElementById('dateInput').value;
+                console.log(dateInput);
+                let selectDate = new Date(dateInput);
+                let today = new Date();
+                today.setHours(0,0,0,0);    // 시간부분 제거
+                if (selectDate>today){
+                    alert("오늘 이전의 날짜만 선택 가능!!!");
+                    return;
+                }
+                console.log('요청!!')
+                let taegetDt = dateInput.replaceAll('-','');
+                url_temp = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${key}&targetDt=${taegetDt}`;
+                console.log(url_temp);
+                
+                ajax.open('GET',url_temp, true);
+                ajax.onreadystatechange = fn_table;
+                ajax.send();
+            })
+
+           
+
+               
+
+                function fn_table(){
+                    if (ajax.readyState ==4 && ajax.status==200){
+                        
+                       let obj =JSON.parse(ajax.responseText);
+                       let arr = obj['boxOfficeResult']['dailyBoxOfficeList'];
+                       let str ='';
+                      
+                        for (let i =0; i<arr.length; i++){
+                            console.log(arr[i]['movieNm'])
+                            str += '<tr>'
+                            str += '<td>' +arr[i]['rank']+'</td>';
+                            str += '<td>' +arr[i]['movieNm']+'</td>';
+                            str += '<td>' +arr[i]['openDt']+'</td>';
+                            str += '<td>' +arr[i]['salesAmt']+'</td>';
+                            str += '<td>' +arr[i]['audiCnt']+'</td>';
+                            str += '<td>' +arr[i]['salesAcc']+'</td>';
+                            str += '<td>' +arr[i]['audiAcc']+'</td>';
+                            str += '</tr>';
+
+                        }
+                        document.getElementById('movieTableBody').innerHTML =str;
+                        let opn = document.getElementById('movieTable')
+                        opn.style.display ="block";
+                        
+                    }
+                }
+
+
+
+
+            
+        }
+        
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>영화 데이터 조회</h2>
+    <form id="movieForm">
+        <label for="dateInput">날짜 입력 (YYYY-MM-DD): </label>
+        <input type="date" id="dateInput" required>
+        <button type="submit">조회</button>
+    </form>
+    
+    <table id="movieTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>영화 제목</th>
+                <th>개봉일</th>
+                <th>당일 매출액</th>
+                <th>당일 관객수</th>
+                <th>누적 매출액</th>
+                <th>누적 관객수</th>
+            </tr>
+        </thead>
+        <tbody id="movieTableBody">
+            <!-- 데이터가 여기에 추가됩니다 -->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
