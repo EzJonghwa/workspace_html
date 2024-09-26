@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        function fn_random_color(){
+            let rgb1 = Math.floor(Math.random() * (255+1));
+            let rgb2 = Math.floor(Math.random() * (255+1));
+            let rgb3 = Math.floor(Math.random() * (255+1));
+            let str = 'rgba('+rgb1+','+rgb2+','+rgb3+',0.6)'
+            return str;
+      }
+
+    </script>
+    <style>
+        body{margin:0; height: 100vh; display: flex; justify-content: center; align-items: center;}
+        #myChart{width: 800px; height: 800px;}
+
+    </style>
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        let Python_color = fn_random_color();
+        let java_color = fn_random_color();
+        let jsp_color = fn_random_color();
+        const ctx = document.getElementById('myChart');
+
+        let configs = {
+          type: 'bar',
+          data: {
+            labels: ['팽수','동길','길동'],
+            
+            datasets: [{
+                
+                        label: 'Python',
+                        data: [90,80,100],
+                        backgroundColor: [
+                        Python_color
+                            ],
+                            borderColor: [
+                            Python_color
+                            ],
+                        borderWidth: 1
+                        },
+                        {
+                
+                label: 'Java',
+                data: [60,50,20],
+                backgroundColor: [
+                java_color
+                    ],
+                    borderColor: [
+                    java_color
+                    ],
+                borderWidth: 1
+                }
+
+       
+        ]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        }
+        let myChart = new Chart(ctx,configs);
+
+        function fn_change(){
+            console.log(configs);
+            color = fn_random_color();
+            configs.data.datasets[0].backgroundColor=[color,color,color];
+            myChart.update();
+        }
+      </script>
+      <button id="btn" onclick="fn_change()">변경</button>
+</body>
+</html>
