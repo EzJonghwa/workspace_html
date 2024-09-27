@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+    <div>
+  <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    let data ={
+        labels : ['JAVA','DB','PYTHON','JS','SPRING'],
+        datasets : [{
+            label : '펭수'
+            ,data :[100,80,90,50,100]
+        },
+        {
+            label : '동수'
+            ,data :[50,100,90,50,60]
+        }
+        ,
+        {
+            label : '길동'
+            ,data :[90,20,50,80,100]
+        }
+
+    ]
+    };
+
+    let config = {
+        type: 'radar',
+        data: data,
+        options :{
+            elements:{
+
+                line :{
+                    borderWidth:3
+            }
+        }}
+    };
+    let myChart = new Chart(document.getElementById('myChart'),config)
+
+</script>
+    
+</body> 
+</html>

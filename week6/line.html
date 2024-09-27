@@ -35,14 +35,16 @@
         let labels_list =[];
         let krw_list =[];
         let jpy_list =[];
-
+        let eur_list =[];
+        
         let configs = {
           type: 'line',
           data: {
-            labels: ['팽수','동길','길동'],
+            labels: [],
             
             datasets: [{label: 'KRW',data: krw_list,},
                         {label: 'JPY',data: jpy_list},
+                        {label: 'EUR',data: jpy_list},
            
        
         ]
@@ -63,18 +65,26 @@
             console.log(data);
             console.log("==================================================")
 
-
+            datasets =data['quotes']
+            labels_list = Object.keys(datasets)
+            for (let i =0; i<labels_list.length; i++){
+              krw_list.push(datasets[labels_list[i]]['USDKRW'])
+              jpy_list.push(datasets[labels_list[i]]['USDJPY'])
+              eur_list.push(datasets[labels_list[i]]['USDEUR'])
+            }
           });
         }
 
         get_data();
 
         function fn_change(){
-            console.log(configs);
 
-            configs.data.labels['2024-01-01','2024-01-02','2024-01-03'];
-            configs.data.datasets[0].data =[1000,1200,1600];
-            configs.data.datasets[1].data =[900,500,1000];
+
+            configs.data.labels = labels_list;
+            configs.data.datasets[0].data =krw_list;
+            configs.data.datasets[1].data =jpy_list;
+            configs.data.datasets[2].data =eur_list;
+            ;
             myChart.update();
         }
 
