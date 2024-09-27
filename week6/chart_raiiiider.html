@@ -26,50 +26,49 @@
             let data ={
                 labels :[],
                 datasets :[
-                    {label :"Java",
-                    data : []
-                    },
-                    {label :"Python",
+                    {label :`${nm}`,
                     data : []
                     }
                 
             ]
             }
             let configs ={
-                type : "bar",
+                type : "radar",
                 data : data,
                 options :{
-                    scales :{
-                        y:{
-                            beginAtZero :true
-                        }
+                    elements :{
+                        line :{
+                             borderWidth:3
+                              }
                     }
                 }
             }
             
             scoreChart = new Chart($("#myChart"),configs);
 
-            
+
             $("#addStudent").click(function(){
                 // 가져오기
                 let nm = $("#name").val();
                 let scoreA = parseInt($("#scoreA").val());
                 let scoreB = parseInt($("#scoreB").val());
+                let scoreC = parseInt($("#scoreC").val());
                 // 빈칸, 및 유효성 검사
-                if(!nm || isNaN(scoreA) || isNaN(scoreB)){
+                if(!nm || isNaN(scoreA) || isNaN(scoreB) || isNaN(scoreC)){
                     alert("정확하게 입력하세요")
                     return;
                 }
                 // 학생 데이터 추가
-                students.push({nm,scoreA,scoreB});
+                students.push({nm,scoreA,scoreB,scoreC});
 
                 // 학생 목록에 추가
-                $("#studentList").append(`<li>${nm} - Java : ${scoreA}, Python: ${scoreB} </li>`);
+                $("#studentList").append(`<li>${nm} - Java : ${scoreA}, Python: ${scoreB} , Jsp: ${scoreC} </li>`);
                 // 입력 초기화
                 // $("#scoreForm")[0].reset
                 $("#name").val('');
                 $("#scoreA").val('');
                 $("#scoreB").val('');
+                $("#scoreC").val('');
                 updateChart();
             })
             // $(document).keydown(function(event){
@@ -100,6 +99,7 @@
             scoreChart.data.labels = students.map(student=>student.nm);
             scoreChart.data.datasets[0].data = students.map(student=>student.scoreA);
             scoreChart.data.datasets[1].data = students.map(student=>student.scoreB);
+            scoreChart.data.datasets[2].data = students.map(student=>student.scoreC);
             //                                          map 함수 -foreach 처럼 사용 배열을 하나씩 순회 하면서 작업함
             scoreChart.update();
         }
@@ -127,6 +127,7 @@
 </head>
 <body>
     <h1 class="py-5 text-center"> 학생 성적 입력!</h1>
+
     <div class="container-fulid">
         <div class="row p-4">
             <div class="col-6">
@@ -148,6 +149,11 @@
                         <input type="text" class="form-control" id="scoreB" placeholder="Python 성적">
 
                     </div>
+                    <div class="col-2"></div>
+                        <label class="form-label">Jsp 성적</label>
+                        <input type="text" class="form-control" id="scoreC" placeholder="Jsp 성적">
+
+                    </div>
                     <div class="col-2">
                         <button class="btn btn-primary" type="button" id="addStudent">+</button>
                     </div>
@@ -159,7 +165,7 @@
 
                 </div>
             </div>
-        <div class="col-6">
+        <div class="col-4">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
