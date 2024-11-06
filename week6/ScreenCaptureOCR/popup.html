@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture</title>
+    <style>
+        body{width: 400px;}
+        #result-container{
+            margin-top: 20px; padding: 10px; border: 1px solid #ccc;
+            border-radius: 5px; overflow-x:auto ; overflow-y: auto;
+
+        }
+        #ocr-result{font-size: 15px; color: #333;}
+
+    </style>
+</head>
+<body>
+    <button id="capture">Capture Screen</button>
+    <div id="result-container">
+        <h3>OCR 결과</h3>
+        <p id="ocr-result">결과가 여기에 표시 됩니다.</p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+@font-face {
+         font-family: 'BlackHanSans';
+         src: url('../static/fonts/BlackHanSans-Regular.ttf') format('truetype');
+         font-weight: normal;
+         font-style: normal;
+}
+body {
+    font-family: 'BlackHanSans', sans-serif;
+    background-color: #281e00; /* 따뜻한 가을 배경색으로 변경 */
+    text-align: center;
+    color: #8B4513; /* 가을의 따뜻한 갈색 톤 */
+    padding: 20px;
+}
+.card-image {
+    width: 5%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+#sakura {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+.petal {
+    position: absolute;
+    top: -10px;
+    color: #FF8C00; /* 가을 단풍 느낌의 오렌지색 */
+    opacity: 0.8;
+    font-size: 24px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    0% { top: -50px; }
+    100% { top: 100vh; }
+}
+.form-container {
+    width: 100%;
+}
+#cardForm {
+    width: 100%; /* form의 너비를 부모 컨테이너에 맞춥니다. */
+}
+.card-image {
+    width: 100%; /* 이미지가 컨테이너의 너비에 맞게 조정됩니다. */
+    display: block; /* 이미지를 블록 요소로 만들어 너비 조정이 가능하게 합니다. */
+}

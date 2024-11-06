@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 추천 시스템</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>고객 취향 정보 입력</h2>
+        <form id="preferenceForm">
+            <div class="form-group">
+                <label for="leisure">이름</label>
+                <input name="mem_nm" type="text">
+            </div>
+            <div class="form-group">
+                <label for="leisure">1. 선호하는 여가 활동은 무엇인가요?:</label>
+                <!-- 선호하는 여가 활동 -->
+                <select name="leisure" id="leisure">
+                    <option value="1">독서</option>
+                    <option value="2">운동 (헬스, 요가, 등산 등)</option>
+                    <option value="3">영화/TV 시청</option>
+                    <option value="4">게임</option>
+                    <option value="5">여행</option>
+                </select>
+            </div>
+            <div class="form-group">
+
+                <label for="social_media">2. 주로 이용하는 소셜 미디어 플랫폼은 무엇인가요?</label>
+                <!-- 주로 이용하는 소셜 미디어 플랫폼 -->
+                <select name="social_media" id="social_media">
+                    <option value="1">인스타그램</option>
+                    <option value="2">페이스북</option>
+                    <option value="3">트위터/X</option>
+                    <option value="4">틱톡</option>
+                    <option value="5">유튜브</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="music_genre">3. 좋아하는 음악 장르는 무엇인가요?</label>
+                <!-- 좋아하는 음악 장르 -->
+                <select name="music_genre" id="music_genre">
+                    <option value="1">팝</option>
+                    <option value="2">힙합/랩</option>
+                    <option value="3">록/메탈</option>
+                    <option value="4">클래식/재즈</option>
+                    <option value="5">EDM/일렉트로닉</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="food_preference">4. 좋아하는 음식 유형은 무엇인가요?</label>
+                <!-- 좋아하는 음식 유형 -->
+                <select name="food_preference" id="food_preference">
+                    <option value="1">한식</option>
+                    <option value="2">양식 (이탈리안, 프렌치 등)</option>
+                    <option value="3">중식</option>
+                    <option value="4">일식</option>
+                    <option value="5">인도/동남아 음식</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="travel_style">5. 여행할 때 선호하는 스타일은 무엇인가요?</label>
+                <!-- 여행할 때 선호하는 스타일 -->
+                <select name="travel_style" id="travel_style">
+                    <option value="1">자연 속에서의 휴식 (산, 바다 등)</option>
+                    <option value="2">도시 탐방 (관광지, 명소 등)</option>
+                    <option value="3">액티비티 중심 (스포츠, 레저)</option>
+                    <option value="4">문화 체험 (역사, 전통, 박물관 등)</option>
+                    <option value="5">미식 여행 (음식 중심)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">유사 고객 찾기</button>
+        </form>
+        <h3 class="mt-5">추천된 유사 고객:</h3>
+        <ul id="similarCustomersList" class="list-group"></ul>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#preferenceForm').on("submit", function(e){
+                e.preventDefault();
+                console.log($(this).serialize());
+                $.ajax({
+                    type : "POST"
+                    ,url :"http://127.0.0.1:5000/get_similar"
+                    ,data: $(this).serialize()
+                    ,success : function(res){
+                        console.log(res);
+                        $("#similarCustomersList").empty();
+                        res.forEach(function(member){
+                            $("#similarCustomersList").append('<li>' + member.mem_nm + '</li>')
+                        });
+
+
+
+                    },error :function(e){
+                        console.log(e);
+                    }
+                })
+
+            });
+        });
+    </script>
+</body>
+
+</html>

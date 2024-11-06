@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Camera Analyzer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        #video {
+            width: 300px;
+            height: 250px;
+            border: 2px solid #000;
+            margin-top: 20px;
+        }
+        #resultImage {
+            width: 300px;
+            height: 250px;
+            border: 2px solid #000;
+            margin-top: 20px;
+        }
+        #controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Live Camera Object Detection</h2>
+    <video id="video" autoplay></video>
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    <img id="resultImage" alt="Detection Result">
+    <div id="controls">
+        <button id="startButton">Start Detection</button>
+        <button id="stopButton">Stop Detection</button>
+    </div>
+    <script>
+        let video = document.getElementById('video');
+        let canvas = document.getElementById('canvas');
+        let context = canvas.getContext('2d');
+        let resultImage = document.getElementById('resultImage');
+        let detectionInterval;
+        // video stream
+        navigator.mediaDevices.getUserMedia({video:true})
+            .then(function(stream) {
+                video.srcObject=stream;
+            })
+            .then(function(err) {
+                console.log('err:' + err);
+            });
+        $("#startButton").click(function(){
+            detectionInterval = setInterval(captureFrame,100);
+        });
+        $("#stopButton").click(function(){
+            clearInterval(detectionInterval);
+        });
+
+
+        function captureFrame(){
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            let dataUrl = canvas.toDataURL('image/jpeg');
+            $.ajax({
+                type:"POST"
+                ,url:'/analyze_frame'
+                ,data: {image:dataUrl}
+                ,success: function(res){
+                    if(res.result_image){
+                        resultImage.src = res.result_image;
+                    }
+                },error: function(e){
+                    console.log(e);
+                }
+            })
+        }
+
+
+
+
+    </script>
+</body>
+</html>

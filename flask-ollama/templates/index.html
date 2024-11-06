@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with AI Assistant</title>
+    <link rel="stylesheet" type="text/css" href="../static/chat.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="chatContainer">
+        <div id="messagesContainer">
+
+
+        </div>
+        <div id="inputContainer">
+            <input type="text" id="userInput" placeholder="Enter your message...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function fn_scroll(){
+            $("#messagesContainer").scrollTop($('#messagesContainer')[0].scrollHeight);
+        }
+
+        function fn_display(message, isBot){
+            var messageCls = isBot ? 'bot-message' :'user-message';
+            var messageEle = $('<div class="message '+messageCls+' fade-in ">'+message+'</div>')
+            $("#messagesContainer").append(messageEle);
+            fn_scroll();
+
+            //opacity1
+            setTimeout(function(){
+                messageEle.css('opacity',1);
+                
+            },100)
+
+        }
+
+
+        $(document).ready(function() {
+            $("#sendBtn").click(function(){
+                var userInput = $("#userInput").val();
+                $("#userInput").val('');
+                fn_display(userInput, false); // 유저의 입력
+                // ollama 요청
+                $.ajax({
+                    url:'http://localhost:5000/generate'
+                    ,type:'POST'
+                    ,contentType : 'application/json'
+                    ,data : JSON.stringify({query:userInput})
+                    ,success : function(res){
+                        console.log(res)
+                        fn_display(res.responses, true);
+                    },error:function(e){
+                            console.log(res)
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
